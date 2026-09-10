@@ -1,0 +1,745 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Iuristech — Sistemas de automatización con IA para despachos de abogados</title>
+<meta name="description" content="Automatizamos las consultas rutinarias sobre el estado de los expedientes. Tu cliente pregunta y obtiene respuesta al momento. Cuando hace falta criterio jurídico, entras tú.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --verde:#0B3B2E;
+  --verde-profundo:#062A21;
+  --marfil:#F5F2EA;
+  --blanco:#FCFBF8;
+  --marron:#2B1B14;
+  --dorado:#B59A62;
+  --gris:#39413D;
+
+  /* Fondo de sección: marfil rebajado, para que la tarjeta flote sobre él */
+  --panel:#EAE6DB;
+  --panel-alt:#F1EEE5;
+
+  --rule:rgba(11,59,46,.16);
+  --rule-soft:rgba(11,59,46,.10);
+  --rule-light:rgba(245,242,234,.22);
+
+  --serif:"Plus Jakarta Sans",-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;
+  --sans:"Plus Jakarta Sans",-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+
+  --card-border:rgba(11,59,46,.14);
+  --card-radius:6px;
+  --card-shadow:
+    0 1px 1px rgba(6,42,33,.05),
+    0 8px 16px -8px rgba(6,42,33,.16),
+    0 28px 56px -26px rgba(6,42,33,.30);
+
+  --nav-h:66px;
+  --pad-y:clamp(4.5rem,8.5vw,8rem);
+  --gutter:clamp(1.25rem,4vw,3rem);
+  --measure:66ch;
+}
+
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth;scroll-padding-top:calc(var(--nav-h) + 12px)}
+body{
+  margin:0;
+  background:var(--panel);
+  color:var(--gris);
+  font-family:var(--sans);
+  font-size:clamp(1rem,.97rem + .18vw,1.0625rem);
+  line-height:1.65;
+  -webkit-font-smoothing:antialiased;
+  text-rendering:optimizeLegibility;
+}
+h1,h2,h3,h4{font-family:var(--serif);color:var(--verde-profundo);font-weight:600;line-height:1.2;margin:0;letter-spacing:-.02em}
+p{margin:0}
+ul,ol{margin:0;padding:0;list-style:none}
+a{color:inherit}
+
+:focus-visible{outline:2px solid var(--verde);outline-offset:3px;border-radius:2px}
+.hero :focus-visible,.footer :focus-visible,.garantia :focus-visible{outline-color:var(--dorado)}
+
+.skip{
+  position:absolute;left:-9999px;top:0;z-index:100;
+  background:var(--verde-profundo);color:var(--marfil);
+  padding:.75rem 1.25rem;font-size:.9rem;
+}
+.skip:focus{left:.5rem;top:.5rem}
+
+.wrap{max-width:1180px;margin:0 auto;padding-inline:var(--gutter)}
+.measure{max-width:var(--measure)}
+
+/* ---------- Navegación ---------- */
+.nav{
+  position:fixed;inset:0 0 auto 0;z-index:50;
+  height:var(--nav-h);
+  background:rgba(234,230,219,.88);
+  border-bottom:1px solid var(--rule);
+  backdrop-filter:saturate(140%) blur(10px);
+}
+.nav__inner{height:100%;display:flex;align-items:center;gap:2rem}
+.wordmark{
+  font-family:var(--serif);font-size:1.22rem;letter-spacing:-.02em;
+  color:var(--verde-profundo);text-decoration:none;font-weight:700;
+  margin-right:auto;white-space:nowrap;
+}
+.nav__links{display:flex;gap:1.6rem;align-items:center}
+.nav__links a{
+  text-decoration:none;font-size:.925rem;color:var(--gris);
+  padding-block:.35rem;border-bottom:1px solid transparent;
+}
+.nav__links a:hover{color:var(--verde-profundo);border-bottom-color:var(--rule)}
+
+.btn{
+  display:inline-block;font-family:var(--sans);font-size:.95rem;font-weight:500;
+  line-height:1;padding:.85rem 1.35rem;border:1px solid var(--verde);
+  background:var(--verde);color:var(--blanco);text-decoration:none;cursor:pointer;
+  border-radius:2px;transition:background .18s ease,border-color .18s ease,color .18s ease;
+}
+.btn:hover{background:var(--verde-profundo);border-color:var(--verde-profundo)}
+.btn--light{background:var(--marfil);border-color:var(--marfil);color:var(--verde-profundo)}
+.btn--light:hover{background:var(--blanco);border-color:var(--blanco);color:var(--verde-profundo)}
+.btn--sm{padding:.66rem 1.1rem;font-size:.9rem}
+.btn--wide{padding:1rem 2rem;font-size:1rem}
+
+.link-quiet{
+  font-size:1rem;color:inherit;text-decoration:none;
+  border-bottom:1px solid currentColor;padding-bottom:2px;opacity:.85;
+}
+.link-quiet:hover{opacity:1}
+
+/* ---------- Hero ---------- */
+.hero{
+  background:var(--verde-profundo);color:rgba(245,242,234,.82);
+  padding-top:calc(var(--nav-h) + clamp(3.5rem,8vw,6.5rem));
+  border-bottom:1px solid var(--verde-profundo);
+}
+.hero__inner{min-height:min(74vh,720px);display:flex;flex-direction:column;align-items:center;text-align:center}
+.hero h1{
+  color:var(--marfil);font-weight:700;
+  font-size:clamp(2.2rem,1.05rem + 4.6vw,4.3rem);
+  line-height:1.08;letter-spacing:-.035em;
+}
+.hero h1 .line{display:block;overflow:hidden;padding-bottom:.06em}
+.hero h1 .line>span{display:block}
+.hero__rule{
+  height:1px;background:var(--dorado);width:100%;
+  margin:clamp(1.8rem,3.5vw,2.9rem) auto clamp(1.6rem,3vw,2.2rem);
+  max-width:320px;
+}
+.hero__sub{
+  font-size:clamp(1.05rem,1rem + .45vw,1.28rem);
+  line-height:1.6;max-width:56ch;color:rgba(245,242,234,.86);
+}
+.hero__actions{
+  display:flex;align-items:center;justify-content:center;
+  gap:clamp(1.25rem,3vw,2.25rem);
+  flex-wrap:wrap;margin-top:clamp(2rem,4vw,2.9rem);
+  padding-bottom:clamp(3rem,7vw,5rem);
+}
+.hero__actions .link-quiet{color:rgba(245,242,234,.9)}
+
+@keyframes rise{from{transform:translateY(102%)}to{transform:translateY(0)}}
+@keyframes draw{from{max-width:0}to{max-width:320px}}
+@keyframes appear{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+.hero h1 .line>span{animation:rise .95s cubic-bezier(.22,.61,.36,1) both}
+.hero h1 .line:nth-child(2)>span{animation-delay:.14s}
+.hero__rule{animation:draw 1s cubic-bezier(.22,.61,.36,1) .5s both}
+.hero__sub{animation:appear .8s ease .72s both}
+.hero__actions{animation:appear .8s ease .84s both}
+
+/* ---------- Secciones ---------- */
+.sec{padding-block:var(--pad-y);background:var(--panel)}
+.sec + .sec{border-top:1px solid rgba(11,59,46,.07)}
+
+.sec__head{
+  text-align:center;
+  margin:0 auto clamp(2.5rem,5vw,4rem);
+  max-width:760px;
+}
+.sec__eyebrow{
+  font-family:var(--mono);font-size:.72rem;font-weight:500;
+  letter-spacing:.14em;text-transform:uppercase;
+  color:var(--gris);opacity:.7;margin-bottom:1rem;
+}
+.sec__head h2{
+  font-size:clamp(1.75rem,1.15rem + 2vw,2.65rem);
+  max-width:20ch;margin-inline:auto;
+}
+.sec__head p{
+  font-size:clamp(1.02rem,.99rem + .3vw,1.15rem);
+  max-width:56ch;margin:1.1rem auto 0;
+}
+/* Sección comprimida: la mitad de altura que una sección normal */
+.sec--compacta{padding-block:clamp(2.25rem,4.25vw,4rem)}
+.sec__head--tight{margin-bottom:clamp(1.6rem,2.75vw,2.4rem)}
+.sec__head--tight h2{font-size:clamp(1.55rem,1.15rem + 1.4vw,2.15rem);max-width:24ch}
+.sec__head--tight p{font-size:1.02rem;margin-top:.85rem}
+
+/* ---------- Sistema de tarjeta ---------- */
+.card{
+  background:var(--blanco);
+  border:1px solid var(--card-border);
+  border-top:2px solid var(--verde);
+  border-radius:var(--card-radius);
+  box-shadow:var(--card-shadow);
+  padding:clamp(1.5rem,2.6vw,2.15rem);
+}
+.card h3{font-size:1.22rem;font-weight:700;margin-bottom:.6rem;line-height:1.3}
+.card p{font-size:1rem;max-width:42ch}
+.card .card__meta{
+  font-family:var(--mono);font-size:.735rem;line-height:1.4;
+  letter-spacing:.01em;color:var(--gris);opacity:.78;
+  margin-bottom:.6rem;max-width:none;
+}
+
+.cards{display:grid;gap:clamp(1rem,1.9vw,1.5rem);align-items:start}
+.cards--even{align-items:stretch;grid-auto-rows:1fr}
+.cards--3{grid-template-columns:repeat(3,minmax(0,1fr))}
+.card--wide{grid-column:1/-1}
+.card--wide p{max-width:60ch}
+
+/* ---------- La transformación ---------- */
+.compare{
+  display:grid;grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:clamp(1rem,2.2vw,1.75rem);align-items:start;
+}
+.compare__panel{
+  border-radius:16px;
+  padding:clamp(1.5rem,2.8vw,2.4rem) clamp(1.4rem,2.6vw,2.25rem) clamp(1.25rem,2.4vw,2rem);
+}
+.compare__panel--now{background:var(--panel-alt);border:1px solid rgba(11,59,46,.05)}
+.compare__panel--new{
+  background:var(--blanco);border:2px solid var(--verde-profundo);
+  box-shadow:var(--card-shadow);
+}
+.compare__pill{
+  display:inline-block;font-family:var(--mono);font-size:.74rem;font-weight:500;
+  letter-spacing:.12em;text-transform:uppercase;line-height:1;
+  padding:.7rem 1.15rem;border-radius:999px;
+}
+.compare__panel--now .compare__pill{background:rgba(11,59,46,.08);color:var(--gris)}
+.compare__panel--new .compare__pill{background:var(--verde-profundo);color:var(--marfil)}
+.compare__list{margin-top:clamp(1.4rem,2.4vw,1.9rem)}
+.compare__list li{
+  display:grid;grid-template-columns:1.5rem minmax(0,1fr);
+  gap:.85rem;align-items:start;
+  padding:1.05rem 0;border-top:1px solid var(--rule-soft);
+  font-size:1rem;line-height:1.5;
+}
+.compare__mark{font-size:.95rem;line-height:1.5;justify-self:center}
+.compare__panel--now li{color:var(--gris)}
+.compare__panel--now .compare__mark{color:rgba(43,27,20,.6)}
+.compare__panel--new li{color:var(--verde-profundo)}
+.compare__panel--new .compare__mark{color:var(--verde)}
+
+/* ---------- Cómo funciona: piezas ---------- */
+.pieces{
+  display:grid;grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:clamp(1rem,1.9vw,1.5rem);align-items:stretch;
+}
+.piece{
+  background:var(--blanco);
+  border:1px solid var(--card-border);
+  border-radius:var(--card-radius);box-shadow:var(--card-shadow);
+  overflow:hidden;display:flex;flex-direction:column;
+}
+.piece__head{background:var(--verde-profundo);padding:1.45rem clamp(1.35rem,2.2vw,1.75rem)}
+.piece__head h3{color:var(--marfil);font-weight:700;font-size:clamp(1.18rem,1.08rem + .4vw,1.38rem);line-height:1.3}
+.piece__body{padding:clamp(1.35rem,2.2vw,1.75rem)}
+.piece__body p{max-width:44ch}
+
+/* ---------- Tabla flotante: rejilla en relieve sobre el marfil ---------- */
+.tabla{
+  display:grid;
+  background:var(--blanco);
+  border:1px solid var(--card-border);
+  border-top:2px solid var(--verde);
+  border-radius:var(--card-radius);
+  box-shadow:var(--card-shadow);
+  overflow:hidden;
+}
+
+/* ---------- Condiciones (confidencialidad) ---------- */
+.condiciones{
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  max-width:980px;margin-inline:auto;
+}
+.condiciones li{padding:clamp(1.25rem,2.4vw,1.75rem) clamp(1.35rem,2.6vw,2rem)}
+.condiciones li:nth-child(n+3){border-top:1px solid var(--rule-soft)}
+.condiciones li:nth-child(2n){border-left:1px solid var(--rule-soft)}
+.condiciones h3{
+  font-size:1.05rem;font-weight:600;line-height:1.35;
+  margin-bottom:.35rem;letter-spacing:-.01em;
+}
+.condiciones p{font-size:.97rem;line-height:1.55;color:var(--gris);max-width:46ch}
+
+/* ---------- Implantación ---------- */
+.pasos{
+  display:grid;grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:clamp(1rem,1.9vw,1.5rem);align-items:stretch;
+}
+.paso h3{font-size:clamp(1.2rem,1.1rem + .4vw,1.42rem);margin-bottom:.6rem;line-height:1.25}
+.paso p{max-width:44ch;font-size:1rem}
+
+/* ---------- Capacidad ---------- */
+.garantia{background:var(--verde-profundo);color:rgba(245,242,234,.82);padding-block:clamp(3.5rem,7vw,6rem)}
+.capacidad{
+  max-width:860px;margin-inline:auto;text-align:center;
+  border:1px solid rgba(181,154,98,.30);
+  border-radius:20px;
+  padding:clamp(2.75rem,6vw,4.5rem) clamp(1.5rem,4vw,3.5rem);
+}
+.capacidad h2{
+  color:var(--marfil);font-weight:700;letter-spacing:-.01em;
+  font-size:clamp(1.15rem,1rem + .65vw,1.55rem);line-height:1.35;
+}
+.capacidad__n{
+  display:block;color:var(--dorado);font-weight:700;line-height:1;
+  font-size:clamp(3.75rem,2rem + 6.5vw,6.5rem);
+  letter-spacing:-.045em;margin-bottom:1.15rem;
+}
+.capacidad p{margin:1.15rem auto 0;max-width:52ch;font-size:1.04rem;line-height:1.62}
+
+/* ---------- Cierre y formulario ---------- */
+.demo-col{max-width:820px;margin:0 auto}
+.form{padding:clamp(1.5rem,3vw,2.4rem)}
+.form__grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1.1rem 1.4rem}
+.field{display:flex;flex-direction:column;gap:.4rem}
+.field--full{grid-column:1/-1}
+.field label{font-size:.88rem;font-weight:500;color:var(--marron)}
+.field input,.field textarea{
+  font-family:var(--sans);font-size:1rem;color:var(--verde-profundo);
+  background:var(--panel-alt);border:1px solid var(--rule);border-radius:4px;
+  padding:.72rem .85rem;width:100%;
+}
+.field textarea{resize:vertical;min-height:7.5rem;line-height:1.55}
+.field input:focus,.field textarea:focus{border-color:var(--verde)}
+.check{display:flex;gap:.7rem;align-items:flex-start;margin-top:1.4rem;font-size:.92rem}
+.check input{margin-top:.28rem;accent-color:var(--verde);width:1rem;height:1rem;flex:0 0 auto}
+.form__foot{margin-top:1.6rem;display:flex;gap:1.1rem;align-items:center;flex-wrap:wrap}
+.done{padding:clamp(1.75rem,3.5vw,2.6rem);margin-top:clamp(2rem,4vw,3rem)}
+.done h3{font-size:1.45rem;font-weight:700;margin-bottom:.8rem}
+.done p{max-width:46ch}
+
+/* ---------- Revelado al scroll ----------
+   La clase .reveal solo la pone el JS, y solo si hay IntersectionObserver
+   y el usuario no ha pedido menos movimiento. Sin JS, todo se ve igual. */
+.reveal{
+  opacity:0;
+  transform:translateY(18px);
+  transition:
+    opacity .72s cubic-bezier(.22,.61,.36,1) var(--d,0ms),
+    transform .72s cubic-bezier(.22,.61,.36,1) var(--d,0ms);
+}
+.reveal.is-in{opacity:1;transform:none}
+
+/* ---------- Footer ---------- */
+.footer{background:var(--verde-profundo);color:rgba(245,242,234,.7);padding-block:clamp(3rem,6vw,4.5rem)}
+.footer .wordmark{color:var(--marfil);display:inline-block;margin:0}
+.footer__top{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:clamp(2rem,5vw,4rem)}
+.footer__desc{margin-top:.8rem;max-width:34ch;font-size:.98rem}
+.footer__cols{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:2rem}
+.footer h4{font-family:var(--sans);font-size:.85rem;font-weight:600;color:rgba(245,242,234,.9);margin-bottom:.9rem}
+.footer li{margin-bottom:.55rem}
+.footer a{color:rgba(245,242,234,.72);text-decoration:none;font-size:.95rem}
+.footer a:hover{color:var(--marfil)}
+.footer__bottom{
+  margin-top:clamp(2.5rem,5vw,4rem);padding-top:1.4rem;
+  border-top:1px solid var(--rule-light);font-size:.85rem;
+  color:rgba(245,242,234,.55);
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width:1000px){
+  .cards--3,.pieces,.pasos{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media (max-width:880px){
+  .nav__links{display:none}
+  .footer__top{grid-template-columns:1fr}
+  .sec__head h2{max-width:22ch}
+}
+@media (max-width:720px){
+  .cards--3,.pieces,.pasos,.condiciones{grid-template-columns:1fr}
+  .condiciones li:nth-child(n+2){border-top:1px solid var(--rule-soft)}
+  .condiciones li:nth-child(2n){border-left:0}
+  .compare{grid-template-columns:1fr}
+  .form__grid{grid-template-columns:1fr}
+  .footer__cols{grid-template-columns:1fr}
+}
+
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation:none !important;transition:none !important}
+  .reveal{opacity:1 !important;transform:none !important}
+  .hero__rule{max-width:320px}
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#contenido">Saltar al contenido</a>
+
+<header class="nav">
+  <div class="wrap nav__inner">
+    <a class="wordmark" href="#inicio">Iuristech</a>
+    <nav class="nav__links" aria-label="Secciones">
+      <a href="#problema">El problema</a>
+      <a href="#como-funciona">El sistema</a>
+      <a href="#confidencialidad">Confidencialidad</a>
+      <a href="#implantacion">Implantación</a>
+    </nav>
+    <a class="btn btn--sm" href="#demo">Solicitar una demo</a>
+  </div>
+</header>
+
+<main id="contenido">
+
+  <!-- HERO -->
+  <section class="hero" id="inicio">
+    <div class="wrap hero__inner">
+      <h1>
+        <span class="line"><span>Tu despacho responde</span></span>
+        <span class="line"><span>aunque tú no estés</span></span>
+      </h1>
+      <div class="hero__rule" aria-hidden="true"></div>
+      <p class="hero__sub">Estado del expediente, documentación pendiente, próximos pasos. El sistema responde; el abogado decide.</p>
+      <div class="hero__actions">
+        <a class="btn btn--light btn--wide" href="#demo">Solicitar una demo</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- EL PROBLEMA -->
+  <section class="sec" id="problema">
+    <div class="wrap">
+      <div class="sec__head">
+        <p class="sec__eyebrow">El problema</p>
+        <h2>El coste que nadie mide</h2>
+        <p>El volumen de preguntas no es el problema. Es el proceso que repites cada vez que llega una.</p>
+      </div>
+
+      <div class="cards cards--3 cards--even">
+        <article class="card">
+          <h3>Responder no es responder</h3>
+          <p>Identificas al cliente, localizas el expediente, recuperas el contexto, entras en el gestor, revisas dónde está el asunto y contestas. Después vuelves a lo que estabas haciendo.</p>
+        </article>
+        <article class="card">
+          <h3>La interrupción cuesta más que la consulta</h3>
+          <p>El problema no es el mensaje. Es tener que salir de un escrito, cambiar de asunto mentalmente y volver a entrar.</p>
+        </article>
+        <article class="card">
+          <h3>Contestas lo mismo muchas veces</h3>
+          <p>Las mismas preguntas, sobre las mismas fases del procedimiento, a clientes distintos, semana tras semana.</p>
+        </article>
+        <article class="card">
+          <h3>No hay horario</h3>
+          <p>Las consultas entran por WhatsApp a cualquier hora. Y cada mensaje sin leer pesa aunque no lo abras.</p>
+        </article>
+        <article class="card">
+          <h3>El silencio se interpreta</h3>
+          <p>Si tardas en contestar, el cliente no piensa que estás ocupado con su asunto. Piensa que su asunto está parado.</p>
+        </article>
+        <article class="card">
+          <h3>Nadie ha decidido que sea así</h3>
+          <p>Es el proceso que se ha ido formando solo, y consume el recurso más caro del despacho: tu tiempo.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- LO QUE CAMBIA -->
+  <section class="sec" id="cambio">
+    <div class="wrap">
+      <div class="sec__head">
+        <p class="sec__eyebrow">La transformación</p>
+        <h2>De interrumpir tu día a recuperar tu tiempo</h2>
+      </div>
+
+      <div class="compare">
+        <div class="compare__panel compare__panel--now">
+          <p class="compare__pill">Hoy</p>
+          <ul class="compare__list">
+            <li><span class="compare__mark" aria-hidden="true">✕</span><span>El cliente pregunta y tú interrumpes lo que estás haciendo</span></li>
+            <li><span class="compare__mark" aria-hidden="true">✕</span><span>Consultas el expediente para recuperar el contexto</span></li>
+            <li><span class="compare__mark" aria-hidden="true">✕</span><span>Contestas manualmente cada consulta rutinaria</span></li>
+            <li><span class="compare__mark" aria-hidden="true">✕</span><span>Las mismas preguntas vuelven cada semana</span></li>
+            <li><span class="compare__mark" aria-hidden="true">✕</span><span>El cliente solo sabe de su asunto cuando te localiza</span></li>
+          </ul>
+        </div>
+
+        <div class="compare__panel compare__panel--new">
+          <p class="compare__pill">Con Iuristech</p>
+          <ul class="compare__list">
+            <li><span class="compare__mark" aria-hidden="true">✓</span><span>El cliente pregunta y recibe respuesta en el momento</span></li>
+            <li><span class="compare__mark" aria-hidden="true">✓</span><span>La información del expediente está donde tiene que estar</span></li>
+            <li><span class="compare__mark" aria-hidden="true">✓</span><span>Tú intervienes en las cuestiones que requieren criterio</span></li>
+            <li><span class="compare__mark" aria-hidden="true">✓</span><span>Las consultas repetitivas dejan de llegarte</span></li>
+            <li><span class="compare__mark" aria-hidden="true">✓</span><span>El cliente puede consultar el estado de su asunto cuando quiera</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CÓMO FUNCIONA -->
+  <section class="sec" id="como-funciona">
+    <div class="wrap">
+      <div class="sec__head">
+        <p class="sec__eyebrow">El sistema</p>
+        <h2>Tres piezas, un mismo sistema</h2>
+        <p>No es un chatbot genérico ni una plantilla. Se construye sobre la información que ya tiene tu despacho y sobre la forma en que trabajas.</p>
+      </div>
+
+      <div class="pieces">
+        <article class="piece">
+          <div class="piece__head">
+            <h3>Portal del cliente</h3>
+          </div>
+          <div class="piece__body">
+            <p>Un espacio donde el cliente consulta la información relevante de su asunto sin necesidad de abrir una conversación cada vez.</p>
+          </div>
+        </article>
+        <article class="piece">
+          <div class="piece__head">
+            <h3>Agente conversacional por WhatsApp</h3>
+          </div>
+          <div class="piece__body">
+            <p>Tu cliente escribe al mismo número al que escribiría de todas formas y recibe respuesta sobre el estado de su expediente, la documentación pendiente y los próximos pasos ya definidos.</p>
+          </div>
+        </article>
+        <article class="piece">
+          <div class="piece__head">
+            <h3>Actualizaciones proactivas</h3>
+          </div>
+          <div class="piece__body">
+            <p>Cuando hay una novedad en el expediente del cliente, este recibe automáticamente un mensaje con la actualización.</p>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONFIDENCIALIDAD -->
+  <section class="sec sec--compacta" id="confidencialidad">
+    <div class="wrap">
+      <div class="sec__head sec__head--tight">
+        <p class="sec__eyebrow">Confidencialidad</p>
+        <h2>Confidencialidad y trato de los datos</h2>
+        <p>El secreto profesional no es negociable. Estas son las condiciones sobre las que se construye el sistema.</p>
+      </div>
+
+      <ul class="tabla condiciones">
+        <li>
+          <h3>El sistema responde con lo que tú decides</h3>
+          <p>Definimos contigo qué información puede comunicarse al cliente y cuál no sale del despacho bajo ningún concepto.</p>
+        </li>
+        <li>
+          <h3>Cada cliente accede solo a su expediente</h3>
+          <p>El acceso se identifica y se limita al asunto de cada cliente.</p>
+        </li>
+        <li>
+          <h3>No sustituimos tu gestor de expedientes</h3>
+          <p>Tu sistema sigue siendo tu sistema. Trabajamos alrededor de la información que ya existe, no la trasladamos a otro sitio.</p>
+        </li>
+        <li>
+          <h3>Todo queda por escrito</h3>
+          <p>Las condiciones de tratamiento, los accesos y los límites se fijan en el contrato antes de empezar la implantación.</p>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- IMPLANTACIÓN -->
+  <section class="sec" id="implantacion">
+    <div class="wrap">
+      <div class="sec__head">
+        <p class="sec__eyebrow">Implantación</p>
+        <h2>Operativo en tres semanas</h2>
+        <p>La implantación la hacemos nosotros. Tú aportas los accesos, la información y las reglas de funcionamiento de tu despacho.</p>
+      </div>
+
+      <ol class="pasos">
+        <li class="card paso">
+          <h3>Semana 01</h3>
+          <p>Revisamos cómo entran hoy las consultas, qué se pregunta con más frecuencia y qué información puede responderse sin tu intervención.</p>
+        </li>
+        <li class="card paso">
+          <h3>Semana 02</h3>
+          <p>Montamos el sistema, lo conectamos con la información del despacho y definimos contigo las reglas de escalado.</p>
+        </li>
+        <li class="card paso">
+          <h3>Semana 03</h3>
+          <p>Validamos el funcionamiento con casos reales, formamos al equipo y lo dejamos operativo.</p>
+        </li>
+        <li class="card paso card--wide">
+          <h3>A partir de ahí</h3>
+          <p>Mantenimiento, soporte y ajustes sobre lo que vaya apareciendo con el uso real.</p>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- CAPACIDAD -->
+  <section class="garantia" aria-labelledby="capacidad-t">
+    <div class="wrap">
+      <div class="capacidad">
+        <h2 id="capacidad-t"><span class="capacidad__n">3</span>despachos de abogados al mes</h2>
+        <p>Es el límite que nos ponemos para que cada implantación tenga el acompañamiento que necesita.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CIERRE Y FORMULARIO -->
+  <section class="sec" id="demo">
+    <div class="wrap">
+      <div class="sec__head">
+        <p class="sec__eyebrow">Tu turno</p>
+        <h2>Pide tu propuesta para Iuristech</h2>
+        <p>Cuéntanos cómo trabajáis hoy y te preparamos una propuesta concreta para tu despacho.</p>
+      </div>
+
+      <div class="demo-col">
+        <form class="card form" id="form" novalidate>
+          <div class="form__grid">
+            <div class="field">
+              <label for="nombre">Nombre completo</label>
+              <input id="nombre" name="nombre" type="text" autocomplete="name" required>
+            </div>
+            <div class="field">
+              <label for="email">Email corporativo</label>
+              <input id="email" name="email" type="email" autocomplete="email" required>
+            </div>
+            <div class="field">
+              <label for="telefono">Teléfono</label>
+              <input id="telefono" name="telefono" type="tel" autocomplete="tel" required>
+            </div>
+            <div class="field">
+              <label for="despacho">Nombre del despacho</label>
+              <input id="despacho" name="despacho" type="text" autocomplete="organization" required>
+            </div>
+            <div class="field field--full">
+              <label for="cargo">Cargo</label>
+              <input id="cargo" name="cargo" type="text" autocomplete="organization-title" required>
+            </div>
+            <div class="field field--full">
+              <label for="caso">Tu caso</label>
+              <textarea id="caso" name="caso" rows="4" required></textarea>
+            </div>
+          </div>
+
+          <label class="check" for="privacidad">
+            <input type="checkbox" id="privacidad" name="privacidad" required>
+            <span>He leído y acepto la <a href="#privacidad-legal">política de privacidad</a>.</span>
+          </label>
+
+          <div class="form__foot">
+            <button class="btn btn--wide" type="submit">Solicitar una demo</button>
+          </div>
+        </form>
+
+        <div class="card done" id="done" hidden tabindex="-1">
+          <p class="card__meta">Solicitud registrada en esta página</p>
+          <h3>Solicitud enviada</h3>
+          <p>Gracias. Te escribimos en menos de 24 horas laborables para buscar hueco. Sin compromiso.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer__top">
+      <div>
+        <a class="wordmark" href="#inicio">Iuristech</a>
+        <p class="footer__desc">Sistemas de automatización con IA para despachos de abogados.</p>
+      </div>
+      <div class="footer__cols">
+        <div>
+          <h4>Navegación</h4>
+          <ul>
+            <li><a href="#problema">El problema</a></li>
+            <li><a href="#como-funciona">El sistema</a></li>
+            <li><a href="#confidencialidad">Confidencialidad</a></li>
+            <li><a href="#implantacion">Implantación</a></li>
+            <li><a href="#demo">Solicitar una demo</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Legal</h4>
+          <ul>
+            <li><a href="#aviso-legal">Aviso legal</a></li>
+            <li><a href="#privacidad-legal">Política de privacidad</a></li>
+            <li><a href="#cookies-legal">Política de cookies</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <p class="footer__bottom">© <span id="year">2026</span> Iuristech. Todos los derechos reservados.</p>
+  </div>
+</footer>
+
+<script>
+document.getElementById('year').textContent = new Date().getFullYear();
+
+/* Revelado al scroll.
+   Progresivo: si el navegador no trae IntersectionObserver o el usuario
+   ha pedido menos movimiento, no se marca nada y la página se ve completa. */
+(function () {
+  var quieto = window.matchMedia('(prefers-reduced-motion: reduce)');
+  if (quieto.matches || !('IntersectionObserver' in window)) return;
+
+  /* [selector, milisegundos de escalonado entre hermanos] */
+  var grupos = [
+    ['.sec__head > *', 70],
+    ['.cards > *',     90],
+    ['.pieces > *',    90],
+    ['.pasos > *',     90],
+    ['.compare > *',  110],
+    ['.condiciones',    0],
+    ['.capacidad',      0],
+    ['.form',           0]
+  ];
+
+  grupos.forEach(function (grupo) {
+    document.querySelectorAll(grupo[0]).forEach(function (el, i, lista) {
+      el.classList.add('reveal');
+      if (grupo[1]) {
+        /* El índice se calcula dentro de su propio contenedor, no del documento */
+        var hermanos = Array.prototype.slice.call(el.parentNode.children);
+        el.style.setProperty('--d', hermanos.indexOf(el) * grupo[1] + 'ms');
+      }
+    });
+  });
+
+  var observador = new IntersectionObserver(function (entradas) {
+    entradas.forEach(function (entrada) {
+      if (!entrada.isIntersecting) return;
+      entrada.target.classList.add('is-in');
+      observador.unobserve(entrada.target);
+    });
+  }, { threshold: 0, rootMargin: '0px 0px -12% 0px' });
+
+  document.querySelectorAll('.reveal').forEach(function (el) {
+    observador.observe(el);
+  });
+})();
+
+/* Formulario sin backend */
+var form = document.getElementById('form');
+var done = document.getElementById('done');
+form.addEventListener('submit', function (e) {
+  e.preventDefault();
+  if (!form.reportValidity()) return;
+  form.hidden = true;
+  done.hidden = false;
+  done.focus();
+});
+</script>
+</body>
+</html>
