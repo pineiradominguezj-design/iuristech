@@ -1,0 +1,702 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Qué puede hacer realmente una IA en un despacho — IURIS.TECH</title>
+<meta name="description" content="«No me fío de que una IA hable con mis clientes.» Dónde está la frontera, qué pasa cuando se cruza y por qué el abogado no pierde el control. Entregable 02 de IURIS.TECH.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --verde:#0B3B2E;
+  --verde-prof:#062A21;
+  --marfil:#F5F2EA;
+  --blanco:#FCFBF8;
+  --marron:#2B1B14;
+  --dorado:#B59A62;
+  --dorado-osc:#8A6F3A;
+  --gris:#39413D;
+  --sans:'Poppins','Helvetica Neue',Arial,sans-serif;
+  --serif:Georgia,Cambria,'Times New Roman',serif;
+  --pad:clamp(24px,6vw,80px);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  background:var(--marfil);
+  color:var(--marron);
+  font-family:var(--serif);
+  font-size:clamp(16px,1.15vw,18px);
+  line-height:1.65;
+  -webkit-font-smoothing:antialiased;
+}
+
+/* ---------- progreso ---------- */
+#progreso{position:fixed;top:0;left:0;height:3px;width:0;background:var(--dorado);z-index:99;transition:width .1s linear}
+
+/* ---------- estructura ---------- */
+section{padding:clamp(72px,11vh,140px) var(--pad);position:relative;overflow:hidden}
+.wrap{max-width:1080px;margin:0 auto}
+.narrow{max-width:760px}
+.oscuro{background:var(--verde-prof);color:var(--marfil)}
+.claro{background:var(--marfil);color:var(--marron)}
+
+/* ---------- tipografía ---------- */
+.kicker{
+  font-family:var(--sans);font-weight:600;font-size:.72rem;letter-spacing:.22em;
+  text-transform:uppercase;color:var(--verde);margin-bottom:28px;
+  display:flex;align-items:center;gap:14px;
+}
+.kicker::after{content:"";flex:1;height:1px;background:currentColor;opacity:.25;max-width:120px}
+.oscuro .kicker{color:rgba(245,242,234,.62)}
+h1{
+  font-family:var(--sans);font-weight:700;
+  font-size:clamp(1.85rem,4.3vw,3.4rem);line-height:1.08;letter-spacing:-.025em;
+  color:var(--blanco);text-wrap:balance;
+}
+h2{
+  font-family:var(--sans);font-weight:600;
+  font-size:clamp(1.7rem,3.9vw,3rem);line-height:1.12;letter-spacing:-.02em;
+  color:var(--verde);margin-bottom:28px;text-wrap:balance;
+}
+.oscuro h2{color:var(--blanco)}
+h3{font-family:var(--sans);font-weight:600;font-size:1.02rem;letter-spacing:.01em;color:var(--marron)}
+p{margin-bottom:1.15em;max-width:66ch}
+.lead{font-size:clamp(1.08rem,1.7vw,1.32rem);line-height:1.55;color:var(--gris)}
+.oscuro .lead{color:rgba(245,242,234,.82)}
+.oscuro p{color:rgba(245,242,234,.86)}
+strong{font-weight:700;color:var(--verde)}
+.oscuro strong{color:var(--blanco)}
+em{font-style:italic}
+.nota{font-family:var(--sans);font-size:.8rem;line-height:1.6;color:var(--gris);opacity:.72;max-width:62ch;font-weight:400}
+.oscuro .nota{color:rgba(245,242,234,.55)}
+
+/* ---------- hero ---------- */
+#hero{
+  min-height:100svh;display:flex;flex-direction:column;justify-content:center;
+  padding-top:clamp(56px,10vh,96px);padding-bottom:clamp(56px,10vh,96px);
+}
+#hero::before{
+  content:"";position:absolute;inset:0;
+  background:radial-gradient(ellipse 70% 55% at 50% 12%,rgba(11,59,46,.85),transparent 70%);
+  pointer-events:none;
+}
+#hero .wrap{position:relative;z-index:1;text-align:center;display:flex;flex-direction:column;align-items:center}
+#hero img{width:clamp(52px,5.6vw,68px);height:auto;margin-bottom:clamp(22px,3.4vh,34px)}
+.hero-eyebrow{
+  font-family:var(--sans);font-weight:500;font-size:.74rem;letter-spacing:.3em;
+  text-transform:uppercase;color:rgba(245,242,234,.55);margin-bottom:clamp(20px,3vh,30px);
+}
+#hero h1{max-width:20ch}
+.hero-sub{
+  font-size:clamp(1.05rem,1.8vw,1.35rem);color:rgba(245,242,234,.78);
+  margin-top:clamp(20px,3vh,30px);max-width:48ch;line-height:1.5;
+}
+.hero-meta{
+  font-family:var(--sans);font-size:.76rem;letter-spacing:.12em;text-transform:uppercase;
+  color:rgba(245,242,234,.42);margin-top:clamp(26px,4vh,42px);font-weight:400;
+}
+.scroll-cue{
+  margin-top:clamp(20px,3vh,32px);width:1px;height:40px;
+  background:linear-gradient(to bottom,rgba(245,242,234,.5),transparent);
+}
+
+/* ---------- remate ---------- */
+.remate{
+  margin-top:52px;padding:34px 38px;background:var(--blanco);
+  border-left:3px solid var(--verde);
+}
+.remate .grande{
+  font-family:var(--sans);font-weight:600;font-size:clamp(1.25rem,2.4vw,1.7rem);
+  line-height:1.25;color:var(--verde);margin-bottom:14px;letter-spacing:-.015em;
+}
+.remate p:last-child{margin-bottom:0}
+.oscuro .remate{background:rgba(245,242,234,.06);border-left-color:rgba(245,242,234,.45)}
+.oscuro .remate .grande{color:var(--blanco)}
+
+/* ---------- 02 temores ---------- */
+.temores{list-style:none;margin:44px 0 0;max-width:700px}
+.temores li{
+  padding:16px 0 16px 30px;position:relative;font-size:1.01rem;line-height:1.5;
+  border-bottom:1px solid rgba(11,59,46,.12);
+}
+.temores li:first-child{border-top:1px solid rgba(11,59,46,.12)}
+.temores li::before{
+  content:"";position:absolute;left:2px;top:27px;width:12px;height:1px;background:var(--dorado-osc);
+}
+.oscuro .temores li{border-color:rgba(245,242,234,.14);color:rgba(245,242,234,.88)}
+.oscuro .temores li::before{background:var(--dorado)}
+
+/* ---------- 03 columnas ---------- */
+.columnas{display:grid;grid-template-columns:1fr 1fr;gap:0;margin:48px 0 0;border:1px solid rgba(11,59,46,.16)}
+.col{padding:clamp(28px,3.2vw,42px)}
+.col:first-child{border-right:1px solid rgba(11,59,46,.16);background:var(--blanco)}
+.col:last-child{background:rgba(11,59,46,.045)}
+.col-tit{
+  font-family:var(--sans);font-weight:700;font-size:1.02rem;letter-spacing:.02em;
+  color:var(--verde);margin-bottom:6px;
+}
+.col-sub{
+  font-family:var(--sans);font-weight:500;font-size:.76rem;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--gris);opacity:.72;margin-bottom:26px;
+}
+.col ul{list-style:none}
+.col li{
+  padding:11px 0 11px 26px;position:relative;font-size:.98rem;line-height:1.45;
+  border-bottom:1px solid rgba(11,59,46,.09);
+}
+.col li:last-child{border-bottom:none}
+.col li::before{
+  content:"";position:absolute;left:2px;top:20px;width:9px;height:1px;background:var(--verde);opacity:.5;
+}
+.col-pie{
+  margin-top:26px;padding-top:20px;border-top:1px solid rgba(11,59,46,.16);
+  font-size:.94rem;line-height:1.5;color:var(--gris);font-style:italic;
+}
+/* variante sobre fondo oscuro */
+.oscuro .columnas{border-color:rgba(245,242,234,.18)}
+.oscuro .col:first-child{border-right-color:rgba(245,242,234,.18);background:rgba(245,242,234,.07)}
+.oscuro .col:last-child{background:transparent}
+.oscuro .col-tit{color:var(--blanco)}
+.oscuro .col-sub{color:rgba(245,242,234,.5);opacity:1}
+.oscuro .col li{border-bottom-color:rgba(245,242,234,.12);color:rgba(245,242,234,.9)}
+.oscuro .col li::before{background:rgba(245,242,234,.6);opacity:1}
+.oscuro .col:last-child li::before{background:var(--dorado);opacity:1}
+.oscuro .col-pie{border-top-color:rgba(245,242,234,.18);color:rgba(245,242,234,.6)}
+
+.regla{margin-top:44px;padding:32px 38px;background:var(--verde);color:var(--blanco)}
+.regla p{
+  font-family:var(--sans);font-weight:500;font-size:clamp(1.02rem,1.7vw,1.22rem);
+  line-height:1.45;color:var(--blanco);margin:0;max-width:60ch;
+}
+.regla p + p{margin-top:12px;font-weight:400;font-size:.98rem;color:rgba(252,251,248,.72)}
+.oscuro .regla{background:rgba(245,242,234,.07);border-left:3px solid var(--dorado)}
+.oscuro .regla p + p{color:rgba(245,242,234,.68)}
+
+/* ---------- 04 diagrama de escalado ---------- */
+.diagrama{--gb:clamp(18px,3vw,40px);margin:56px auto 0;max-width:840px;display:flex;flex-direction:column;align-items:center}
+.nodo{
+  width:100%;max-width:600px;background:var(--blanco);border:1px solid rgba(11,59,46,.18);
+  padding:22px 28px;text-align:center;
+}
+.nodo .et{
+  font-family:var(--sans);font-weight:600;font-size:.68rem;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--verde);opacity:.5;margin-bottom:9px;
+}
+.nodo .tx{
+  font-family:var(--sans);font-weight:500;font-size:clamp(.98rem,1.5vw,1.1rem);
+  line-height:1.4;color:var(--verde);
+}
+.nodo.control{background:var(--verde);border-color:var(--verde)}
+.nodo.control .et{color:rgba(252,251,248,.55);opacity:1}
+.nodo.control .tx{color:var(--blanco);font-weight:600}
+.baja{width:1px;height:38px;background:rgba(11,59,46,.28);position:relative;flex-shrink:0}
+.baja::after{
+  content:"";position:absolute;bottom:-1px;left:-4px;
+  border-left:4.5px solid transparent;border-right:4.5px solid transparent;
+  border-top:7px solid rgba(11,59,46,.42);
+}
+.bifurca{
+  width:100%;display:grid;grid-template-columns:1fr 1fr;gap:var(--gb);
+  position:relative;padding-top:42px;
+}
+.bifurca::before{
+  content:"";position:absolute;top:0;height:1px;background:rgba(11,59,46,.28);
+  left:calc(25% - var(--gb) / 4);width:calc(50% + var(--gb) / 2);
+}
+.rama{position:relative}
+.rama::before{content:"";position:absolute;top:-42px;left:50%;width:1px;height:42px;background:rgba(11,59,46,.28)}
+.rama-et{
+  font-family:var(--sans);font-weight:700;font-size:.76rem;letter-spacing:.2em;
+  text-transform:uppercase;margin-bottom:12px;text-align:center;
+}
+.rama.si .rama-et{color:var(--verde)}
+.rama.no .rama-et{color:var(--dorado-osc)}
+.rama-caja{background:var(--blanco);border:1px solid rgba(11,59,46,.16);padding:22px 26px}
+.rama.si .rama-caja{border-top:3px solid var(--verde)}
+.rama.no .rama-caja{border-top:3px solid var(--dorado)}
+.rama-caja .qh{
+  font-family:var(--sans);font-weight:600;font-size:1.02rem;line-height:1.35;
+  color:var(--verde);margin-bottom:8px;
+}
+.rama-caja p{font-size:.95rem;line-height:1.5;color:var(--gris);margin:0;max-width:none}
+.merge{position:relative;width:100%;height:76px}
+.merge::before{
+  content:"";position:absolute;top:38px;height:1px;background:rgba(11,59,46,.28);
+  left:calc(25% - var(--gb) / 4);width:calc(50% + var(--gb) / 2);
+}
+.merge span{position:absolute;width:1px;background:rgba(11,59,46,.28)}
+.merge .u1{top:0;left:calc(25% - var(--gb) / 4);height:38px}
+.merge .u2{top:0;left:calc(75% + var(--gb) / 4);height:38px}
+.merge .d{top:38px;left:50%;height:38px}
+.merge .d::after{
+  content:"";position:absolute;bottom:-1px;left:-4px;
+  border-left:4.5px solid transparent;border-right:4.5px solid transparent;
+  border-top:7px solid rgba(11,59,46,.42);
+}
+.tres{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:0;
+  margin-top:56px;border-top:1px solid rgba(11,59,46,.16);
+}
+.tres > div{padding:26px clamp(18px,2.4vw,32px);border-right:1px solid rgba(11,59,46,.12)}
+.tres > div:first-child{padding-left:0}
+.tres > div:last-child{border-right:none;padding-right:0}
+.tres h3{color:var(--verde);margin-bottom:9px;line-height:1.3}
+.tres p{font-size:.94rem;line-height:1.5;color:var(--gris);margin:0;max-width:none}
+
+/* ---------- 05 burbujas y casos ---------- */
+.caso{
+  margin-top:44px;padding:clamp(24px,3.2vw,40px);
+  background:rgba(245,242,234,.045);border:1px solid rgba(245,242,234,.16);
+}
+.caso-cab{
+  display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;
+  padding-bottom:18px;margin-bottom:26px;border-bottom:1px solid rgba(245,242,234,.14);
+}
+.caso-num{
+  font-family:var(--sans);font-weight:500;font-size:.74rem;letter-spacing:.2em;
+  text-transform:uppercase;color:rgba(245,242,234,.5);
+}
+.veredicto{
+  font-family:var(--sans);font-weight:700;font-size:.72rem;letter-spacing:.16em;
+  text-transform:uppercase;padding:8px 15px;white-space:nowrap;
+}
+.veredicto.ok{background:rgba(245,242,234,.92);color:var(--verde)}
+.veredicto.esc{background:var(--dorado);color:var(--verde-prof)}
+.burbujas{display:flex;flex-direction:column;gap:14px;max-width:600px}
+.burbuja{
+  align-self:flex-start;background:rgba(245,242,234,.94);color:var(--marron);
+  padding:15px 22px;border-radius:2px 16px 16px 16px;
+  font-size:1.02rem;line-height:1.4;box-shadow:0 1px 0 rgba(0,0,0,.28);max-width:88%;
+}
+.burbuja .quien{
+  display:block;font-family:var(--sans);font-weight:600;font-size:.66rem;
+  letter-spacing:.18em;text-transform:uppercase;color:var(--gris);opacity:.6;margin-bottom:6px;
+}
+.ficha{
+  margin-top:26px;padding-top:22px;border-top:1px solid rgba(245,242,234,.14);
+  display:flex;flex-direction:column;gap:14px;
+}
+.f-linea{display:flex;justify-content:space-between;align-items:baseline;gap:24px}
+.f-linea .k{
+  font-family:var(--sans);font-size:.8rem;line-height:1.35;
+  color:rgba(245,242,234,.55);letter-spacing:.03em;flex-shrink:0;
+}
+.f-linea .v{
+  font-family:var(--sans);font-weight:600;font-size:.98rem;line-height:1.4;
+  color:var(--blanco);text-align:right;
+}
+.f-linea .v.oro{color:var(--dorado)}
+
+/* ---------- 06 rutas ---------- */
+.rutas{margin:48px 0 0}
+.ruta{padding:28px 0;border-top:1px solid rgba(11,59,46,.16)}
+.ruta:last-child{border-bottom:1px solid rgba(11,59,46,.16)}
+.ruta-et{
+  font-family:var(--sans);font-weight:600;font-size:.72rem;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--gris);opacity:.7;margin-bottom:18px;
+}
+.ruta.destacada .ruta-et{color:var(--verde);opacity:1}
+.cadena-h{display:flex;flex-wrap:wrap;align-items:center;gap:10px 12px}
+.chip{
+  font-family:var(--sans);font-weight:500;font-size:.92rem;padding:10px 17px;
+  background:var(--blanco);border:1px solid rgba(11,59,46,.2);color:var(--verde);white-space:nowrap;
+}
+.chip.sistema{background:var(--verde);border-color:var(--verde);color:var(--blanco);font-weight:600}
+.chip.humano{border-color:rgba(11,59,46,.45);border-width:1px;font-weight:600}
+.chip.destino{background:rgba(11,59,46,.06)}
+.fl{font-family:var(--sans);font-size:1rem;color:var(--verde);opacity:.4}
+.ruta-pie{margin-top:18px;font-size:.96rem;line-height:1.5;color:var(--gris);font-style:italic;max-width:62ch}
+
+/* ---------- 07 pivote y cierre ---------- */
+.pivote{
+  margin:44px 0;padding:32px 0;border-top:1px solid rgba(245,242,234,.18);
+  border-bottom:1px solid rgba(245,242,234,.18);
+}
+.pivote p{
+  font-family:var(--sans);font-weight:600;font-size:clamp(1.3rem,2.7vw,2rem);
+  line-height:1.25;color:var(--blanco);margin:0;letter-spacing:-.015em;max-width:32ch;
+}
+.cierre-07{margin-top:56px}
+.cierre-07 .frase{
+  font-family:var(--sans);font-weight:700;
+  font-size:clamp(1.5rem,3.4vw,2.5rem);line-height:1.18;letter-spacing:-.02em;
+  color:var(--blanco);margin-bottom:20px;max-width:19ch;
+}
+.cierre-07 p{color:rgba(245,242,234,.68);font-size:1.05rem;margin:0;max-width:44ch}
+
+/* ---------- 08 cierre ---------- */
+#cierre{padding-bottom:clamp(56px,8vh,90px)}
+.dos-preguntas{list-style:none;margin:36px 0 40px;max-width:660px}
+.dos-preguntas li{
+  padding:22px 0;border-bottom:1px solid rgba(11,59,46,.16);
+  font-family:var(--sans);font-weight:500;font-size:clamp(1.02rem,1.9vw,1.28rem);
+  line-height:1.35;color:var(--verde);display:flex;gap:20px;align-items:baseline;
+}
+.dos-preguntas li:first-child{border-top:1px solid rgba(11,59,46,.16)}
+.dos-preguntas li span{
+  font-family:var(--sans);font-weight:700;font-size:.82rem;color:var(--verde);opacity:.5;
+  letter-spacing:.1em;flex-shrink:0;padding-top:.35em;
+}
+.subrayado{
+  font-family:var(--sans);font-weight:600;font-size:clamp(1.08rem,2vw,1.35rem);
+  line-height:1.4;color:var(--verde);max-width:46ch;margin-bottom:36px;
+}
+.recordatorio{padding:26px 32px;background:var(--blanco);border:1px solid rgba(11,59,46,.16);max-width:620px}
+.recordatorio p{margin:0;font-size:1rem;line-height:1.55}
+.recordatorio a{color:var(--verde);text-decoration:none;border-bottom:1px solid rgba(11,59,46,.4);padding-bottom:1px}
+.recordatorio a:hover{border-bottom-color:var(--verde)}
+
+footer{background:var(--verde-prof);color:rgba(245,242,234,.55);padding:clamp(40px,6vh,64px) var(--pad)}
+footer .wrap{display:flex;align-items:center;gap:clamp(20px,4vw,44px);flex-wrap:wrap}
+footer img{width:40px;height:auto;flex-shrink:0}
+footer .txt{font-family:var(--sans);font-size:.8rem;line-height:1.65;max-width:62ch}
+footer .marca{
+  display:block;font-weight:600;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--marfil);margin-bottom:6px;font-size:.8rem;
+}
+
+/* ---------- animación ---------- */
+.rv{opacity:0;transform:translateY(26px);transition:opacity .85s cubic-bezier(.2,.7,.25,1),transform .85s cubic-bezier(.2,.7,.25,1)}
+.rv.visible{opacity:1;transform:none}
+.rv.d1{transition-delay:.09s}.rv.d2{transition-delay:.18s}.rv.d3{transition-delay:.27s}
+
+/* ---------- responsive ---------- */
+@media(max-width:860px){
+  .columnas,.tres{grid-template-columns:1fr}
+  .col:first-child{border-right:none;border-bottom:1px solid rgba(11,59,46,.16)}
+  .oscuro .col:first-child{border-right:none;border-bottom:1px solid rgba(245,242,234,.18)}
+  .tres > div{border-right:none;border-bottom:1px solid rgba(11,59,46,.12);padding:22px 0}
+  .tres > div:last-child{border-bottom:none}
+  .bifurca{grid-template-columns:1fr;gap:26px;padding-top:0}
+  .bifurca::before,.rama::before{display:none}
+  .rama + .rama{margin-top:6px}
+  .merge{height:38px}
+  .merge::before,.merge .u1,.merge .u2{display:none}
+  .merge .d{top:0}
+  .burbuja{max-width:100%}
+  .f-linea{flex-direction:column;gap:4px}
+  .f-linea .v{text-align:left}
+}
+@media(prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .rv{opacity:1;transform:none;transition:none}
+}
+</style>
+</head>
+<body>
+
+<div id="progreso"></div>
+
+<!-- ============ 01 · HERO ============ -->
+<section id="hero" class="oscuro">
+  <div class="wrap">
+    <img src="data:image/png;base64,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" alt="IURIS.TECH">
+    <div class="hero-eyebrow">Entregable 02 · Qué puede hacer realmente una IA en un despacho</div>
+    <h1>«No me fío de que una IA hable con mis clientes. ¿Y si responde algo que no debe?»</h1>
+    <p class="hero-sub">Es la objeción correcta. Y la respuesta no es «tranquilo, eso no va a pasar».</p>
+    <div class="hero-meta">Cinco minutos de lectura · Con el mecanismo de escalado explicado paso a paso</div>
+    <div class="scroll-cue"></div>
+  </div>
+</section>
+
+<!-- ============ 02 · LA PREGUNTA QUE PREOCUPA ============ -->
+<section class="claro">
+  <div class="wrap narrow">
+    <div class="kicker rv">02 — La pregunta que preocupa</div>
+    <h2 class="rv d1">¿Qué pasa si mi cliente le pregunta algo que no debería responder?</h2>
+    <p class="lead rv d2">Es la primera pregunta que aparece en cuanto se menciona la palabra «IA» dentro de un despacho. No la vamos a esquivar ni la vamos a suavizar, porque es exactamente la pregunta que hay que hacer.</p>
+    <p class="rv d2">Detrás de esa frase hay miedos muy concretos. Conviene ponerlos por escrito, uno a uno:</p>
+
+    <ul class="temores rv d2">
+      <li>Que suelte una opinión jurídica que nadie le ha pedido.</li>
+      <li>Que interprete un plazo y se equivoque.</li>
+      <li>Que tranquilice a un cliente cuando no había motivo para tranquilizarlo.</li>
+      <li>Que diga algo que mañana comprometa al despacho.</li>
+      <li>Que el cliente se quede convencido de que ha hablado con su abogado.</li>
+    </ul>
+
+    <div class="remate rv">
+      <p class="grande">Ninguno de esos miedos es exagerado. Todos describen algo que un sistema mal diseñado haría.</p>
+      <p>La diferencia entre una herramienta que da miedo y una que puede entrar en un despacho no está en lo lista que sea. Está en lo que tiene <em>prohibido</em> hacer.</p>
+      <p><strong>Por eso no empezamos definiendo qué puede hacer. Empezamos definiendo qué no va a hacer nunca.</strong></p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 03 · LA FRONTERA ============ -->
+<section class="oscuro">
+  <div class="wrap">
+    <div class="kicker rv">03 — La frontera</div>
+    <h2 class="rv d1">Todo depende de dónde esté la línea.<br>Esta es la nuestra.</h2>
+    <p class="lead rv d2" style="max-width:58ch">No es una frontera difusa ni una cuestión de confiar y cruzar los dedos. Es una lista cerrada, escrita antes de que el sistema atienda a nadie.</p>
+
+    <div class="columnas rv">
+      <div class="col">
+        <div class="col-tit">La IA puede</div>
+        <div class="col-sub">Terreno de la información</div>
+        <ul>
+          <li>Informar del estado disponible del expediente</li>
+          <li>Recuperar información ya autorizada por el despacho</li>
+          <li>Responder consultas rutinarias y repetidas</li>
+          <li>Indicar qué documentación falta por aportar</li>
+          <li>Confirmar fechas, plazos y trámites ya fijados</li>
+          <li>Avisar de que ha entrado un escrito o una notificación</li>
+        </ul>
+        <div class="col-pie">Nada de esto se inventa. Son datos que ya existen dentro de tu despacho: el sistema los consulta y los transmite.</div>
+      </div>
+      <div class="col">
+        <div class="col-tit">La IA no debe</div>
+        <div class="col-sub">Terreno del criterio</div>
+        <ul>
+          <li>Interpretar jurídicamente un caso</li>
+          <li>Decidir o sugerir una estrategia</li>
+          <li>Valorar riesgos jurídicos</li>
+          <li>Anticipar el resultado de un procedimiento</li>
+          <li>Sustituir el criterio profesional</li>
+          <li>Responder cuando la información no es concluyente</li>
+        </ul>
+        <div class="col-pie">Fíjate en el verbo: no decimos «no puede», decimos «no debe». No es una limitación técnica que algún día se arregle. Es una regla de diseño.</div>
+      </div>
+    </div>
+
+    <div class="regla rv">
+      <p>Sistema para la información. Abogado para el criterio. Y cuando no está claro de qué lado cae una pregunta, cae de tu lado.</p>
+      <p>Esa frontera no la fija el proveedor ni la fija el software: la fijas tú, por escrito, antes de empezar. Y se puede mover el día que decidas moverla.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 04 · EL MECANISMO DE ESCALADO ============ -->
+<section id="mecanismo" class="claro">
+  <div class="wrap">
+    <div class="kicker rv">04 — El mecanismo de escalado</div>
+    <h2 class="rv d1">Lo que parecía el riesgo es, en realidad, la garantía.</h2>
+    <p class="lead rv d2" style="max-width:60ch">La pregunta no es si algún día llegará una consulta que el sistema no debe responder. Llegará, y llegará pronto. La pregunta es qué ocurre exactamente en ese momento. Ocurre esto:</p>
+
+    <div class="diagrama rv">
+      <div class="nodo">
+        <div class="et">Paso 01</div>
+        <div class="tx">El cliente pregunta</div>
+      </div>
+      <div class="baja"></div>
+      <div class="nodo">
+        <div class="et">Paso 02</div>
+        <div class="tx">IURIS.TECH comprueba si esa consulta está dentro de lo autorizado</div>
+      </div>
+
+      <div class="bifurca">
+        <div class="rama si">
+          <div class="rama-et">Sí puede responder</div>
+          <div class="rama-caja">
+            <div class="qh">Responde.</div>
+            <p>Consulta el expediente y contesta con información real, actualizada y verificable. En segundos, a cualquier hora, sin interrumpir a nadie.</p>
+          </div>
+        </div>
+        <div class="rama no">
+          <div class="rama-et">No puede responder</div>
+          <div class="rama-caja">
+            <div class="qh">No improvisa: escala.</div>
+            <p>Le dice al cliente que esa consulta la atiende su abogado, y te la pasa a ti con el contexto ya preparado. No arriesga una respuesta.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="merge"><span class="u1"></span><span class="u2"></span><span class="d"></span></div>
+
+      <div class="nodo control">
+        <div class="et">En los dos caminos</div>
+        <div class="tx">El abogado mantiene el control</div>
+      </div>
+    </div>
+
+    <div class="tres rv">
+      <div>
+        <h3>La duda escala</h3>
+        <p>No hay respuestas «a medias». Si el sistema no está seguro de que la consulta cae dentro de la frontera, no la responde: te la pasa. La duda siempre viaja hacia arriba.</p>
+      </div>
+      <div>
+        <h3>Todo queda registrado</h3>
+        <p>Ves qué se ha respondido, qué se ha derivado y por qué. La automatización no es una caja negra: es un tramo del trabajo que puedes auditar cuando quieras.</p>
+      </div>
+      <div>
+        <h3>La frontera es tuya</h3>
+        <p>Se define contigo al principio y se ajusta cuando lo pidas. Si un tipo de consulta te incomoda, sale de la lista y pasa a escalar siempre.</p>
+      </div>
+    </div>
+
+    <div class="remate rv">
+      <p class="grande">Un sistema que reconoce que no debe responder no es un sistema que falla. Es un sistema funcionando.</p>
+      <p>El escalado no es el plan B para cuando algo sale mal. Es la pieza central del diseño: lo que permite que el resto pueda automatizarse con tranquilidad.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 05 · UN EJEMPLO REAL ============ -->
+<section class="oscuro">
+  <div class="wrap">
+    <div class="kicker rv">05 — Dos mensajes</div>
+    <h2 class="rv d1">La frontera se entiende mejor con dos mensajes.</h2>
+    <p class="lead rv d2" style="max-width:56ch">Llegan el mismo martes, del mismo cliente, con diez minutos de diferencia. Uno se resuelve solo. El otro llega a tu mesa.</p>
+
+    <div class="caso rv">
+      <div class="caso-cab">
+        <span class="caso-num">Mensaje 01 · 09:12</span>
+        <span class="veredicto ok">Responde</span>
+      </div>
+      <div class="burbujas">
+        <div class="burbuja"><span class="quien">Cliente</span>Buenos días. ¿Cómo va mi expediente?</div>
+      </div>
+      <div class="ficha">
+        <div class="f-linea"><span class="k">Qué está pidiendo</span><span class="v">Un dato que ya existe</span></div>
+        <div class="f-linea"><span class="k">De qué lado cae</span><span class="v">Información</span></div>
+        <div class="f-linea"><span class="k">Qué hace el sistema</span><span class="v">Consulta el expediente y contesta: estado actual, último trámite, documentación pendiente y siguiente paso previsto</span></div>
+        <div class="f-linea"><span class="k">Tu intervención</span><span class="v">Ninguna</span></div>
+      </div>
+    </div>
+
+    <div class="caso rv">
+      <div class="caso-cab">
+        <span class="caso-num">Mensaje 02 · 09:23</span>
+        <span class="veredicto esc">Escala al abogado</span>
+      </div>
+      <div class="burbujas">
+        <div class="burbuja"><span class="quien">Cliente</span>Vale, gracias. Y para contestar a esto, ¿qué estrategia me recomienda?</div>
+      </div>
+      <div class="ficha">
+        <div class="f-linea"><span class="k">Qué está pidiendo</span><span class="v">Criterio jurídico</span></div>
+        <div class="f-linea"><span class="k">De qué lado cae</span><span class="v oro">Fuera de la frontera</span></div>
+        <div class="f-linea"><span class="k">Qué hace el sistema</span><span class="v">No interpreta, no sugiere y no adelanta nada. Le indica que esa consulta la atiende su abogado y te la traslada con el hilo completo</span></div>
+        <div class="f-linea"><span class="k">Tu intervención</span><span class="v oro">Aquí sí. Y solo aquí</span></div>
+      </div>
+    </div>
+
+    <div class="remate rv">
+      <p class="grande">El cliente no percibe un muro. Percibe orden.</p>
+      <p>Unas cosas se contestan al instante y otras las contesta su abogado. Que es, exactamente, como debería haber funcionado siempre.</p>
+      <p style="margin-bottom:0">Y tú ves con precisión dónde termina la automatización. No es una zona gris que haya que vigilar: es una línea que puedes leer.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 06 · EL NUEVO MODELO ============ -->
+<section class="claro">
+  <div class="wrap">
+    <div class="kicker rv">06 — El nuevo modelo</div>
+    <h2 class="rv d1">Lo que cambia no es quién decide. Es por dónde pasa cada cosa.</h2>
+    <p class="lead rv d2" style="max-width:58ch">Hoy todo circula por la misma vía, y esa vía eres tú. Después hay dos, y solo una de ellas te necesita.</p>
+
+    <div class="rutas rv">
+      <div class="ruta">
+        <div class="ruta-et">Antes</div>
+        <div class="cadena-h">
+          <span class="chip">Cliente</span><span class="fl">→</span>
+          <span class="chip humano">Abogado</span><span class="fl">→</span>
+          <span class="chip">Expediente</span><span class="fl">→</span>
+          <span class="chip destino">Respuesta</span>
+        </div>
+        <div class="ruta-pie">Toda respuesta, sin distinguir si necesita criterio o no, atraviesa el único recurso que no puedes multiplicar.</div>
+      </div>
+
+      <div class="ruta destacada">
+        <div class="ruta-et">Después · Consulta de información</div>
+        <div class="cadena-h">
+          <span class="chip">Cliente</span><span class="fl">→</span>
+          <span class="chip sistema">IURIS.TECH</span><span class="fl">→</span>
+          <span class="chip">Información disponible</span><span class="fl">→</span>
+          <span class="chip destino">Respuesta</span>
+        </div>
+        <div class="ruta-pie">La mayoría del volumen sale de tu mesa. No porque alguien decida por ti, sino porque no había nada que decidir.</div>
+      </div>
+
+      <div class="ruta destacada">
+        <div class="ruta-et">Después · Cuando requiere criterio</div>
+        <div class="cadena-h">
+          <span class="chip">Cliente</span><span class="fl">→</span>
+          <span class="chip sistema">IURIS.TECH</span><span class="fl">→</span>
+          <span class="chip humano">Abogado</span>
+        </div>
+        <div class="ruta-pie">La consulta llega igual que antes, pero llega filtrada, con contexto y sin haber interrumpido tu mañana quince veces.</div>
+      </div>
+    </div>
+
+    <div class="regla rv">
+      <p>Sigues en el circuito. Dejas de ser el cuello de botella de la información.</p>
+      <p>Ningún cliente pierde acceso a su abogado. Lo que pierde es la espera para saber si le han llegado los papeles.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 07 · LO QUE PROTEGEMOS ============ -->
+<section class="oscuro">
+  <div class="wrap">
+    <div class="kicker rv">07 — Lo que estamos protegiendo</div>
+    <h2 class="rv d1">Esto no va de que hables menos con tus clientes.</h2>
+    <p class="lead rv d2" style="max-width:58ch">Cuando un cliente te escribe cinco veces para saber si ha entrado un escrito, esa relación no se está fortaleciendo. Se está gastando en logística.</p>
+
+    <div class="pivote rv">
+      <p>La confianza no se construye contestando rápido. Se construye cuando hablas y aportas criterio.</p>
+    </div>
+
+    <p class="rv">Cada conversación que dedicas a confirmar un dato es una conversación que no dedicas al asunto. Y el cliente, aunque no sepa ponerlo en palabras, también lo nota: le respondes deprisa, entre dos cosas, con la cabeza en otro expediente.</p>
+    <p class="rv">Cuando la información fluye sola, lo que queda entre vosotros es lo que de verdad justifica que te haya contratado.</p>
+
+    <div class="cierre-07 rv">
+      <div class="frase">No queremos sustituir la relación entre abogado y cliente.</div>
+      <p>Queremos protegerla de las tareas que no necesitan al abogado.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 08 · CIERRE ============ -->
+<section id="cierre" class="claro">
+  <div class="wrap narrow">
+    <div class="kicker rv">08 — Antes de vernos</div>
+    <h2 class="rv d1">El próximo día dibujamos tu frontera.</h2>
+    <p class="lead rv d2">No vamos a hablar de tecnología. Vamos a hacer una lista contigo, en dos columnas, con dos preguntas:</p>
+
+    <ol class="dos-preguntas rv d2">
+      <li><span>01</span>¿Qué preguntas de tus clientes responderías con los ojos cerrados, sin abrir nada?</li>
+      <li><span>02</span>¿Cuáles no dejarías salir del despacho sin haberlas leído tú antes?</li>
+    </ol>
+
+    <p class="subrayado rv">Todo lo que caiga en la primera columna es lo que IURIS.TECH puede quitarte de encima. Lo segundo sigue siendo tuyo, íntegro y sin matices.</p>
+
+    <div class="recordatorio rv">
+      <p>Y si dudas de dónde cae una pregunta, no la coloques: tráela sin clasificar. Esas son las interesantes, y para esas ya sabes lo que hace <a href="#mecanismo">el mecanismo</a>: escalar.</p>
+    </div>
+
+    <p class="nota rv" style="margin-top:40px">Este documento describe el diseño funcional del sistema: qué se automatiza, qué no y qué ocurre en el límite entre ambas cosas. El alcance concreto se define despacho a despacho, por escrito, antes de la puesta en marcha.</p>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <img src="data:image/png;base64,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" alt="IURIS.TECH">
+    <div class="txt">
+      <span class="marca">IURIS.TECH</span>
+      Entregable 02 — Qué puede hacer realmente una IA en un despacho. Documento de trabajo previo a nuestra reunión. La frontera entre información y criterio se acuerda con cada despacho y queda documentada antes de que el sistema atienda a ningún cliente.
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(e.isIntersecting){ e.target.classList.add('visible'); io.unobserve(e.target); }
+    });
+  }, {threshold:.15, rootMargin:'0px 0px -8% 0px'});
+  document.querySelectorAll('.rv').forEach(function(el){ io.observe(el); });
+
+  var barra = document.getElementById('progreso');
+  window.addEventListener('scroll', function(){
+    var h = document.documentElement.scrollHeight - window.innerHeight;
+    barra.style.width = (h > 0 ? (window.scrollY / h) * 100 : 0) + '%';
+  }, {passive:true});
+})();
+</script>
+</body>
+</html>
