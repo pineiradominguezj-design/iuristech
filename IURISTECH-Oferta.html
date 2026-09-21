@@ -206,45 +206,6 @@ input[type=range]:focus-visible{outline:2px solid var(--dorado-osc);outline-offs
 .claro .eslabon,.claro-alt .eslabon{border-color:rgba(11,59,46,.2);color:var(--verde)}
 .cadena .sep{font-family:var(--sans);color:var(--dorado);font-size:.9rem}
 
-/* ---------- pieza en detalle ---------- */
-.modulo{display:grid;grid-template-columns:1fr 1fr;gap:clamp(32px,5vw,64px);margin-top:48px;align-items:center}
-.modulo h3{
-  font-family:var(--sans);font-weight:600;font-size:clamp(1.2rem,2.2vw,1.5rem);
-  color:var(--verde);line-height:1.25;margin-bottom:16px;letter-spacing:-.01em;
-}
-.oscuro .modulo h3{color:var(--blanco)}
-.modulo ul{list-style:none;margin-top:22px}
-.modulo li{
-  font-family:var(--sans);font-size:.9rem;line-height:1.45;color:var(--gris);
-  padding:9px 0 9px 22px;position:relative;
-}
-.oscuro .modulo li{color:rgba(245,242,234,.86)}
-.modulo li::before{
-  content:"";position:absolute;left:0;top:17px;width:11px;height:1px;background:var(--dorado-osc);
-}
-.oscuro .modulo li::before{background:var(--dorado)}
-
-/* ---------- chat de ejemplo ---------- */
-.chat{
-  background:var(--verde-prof);border:1px solid rgba(181,154,98,.35);
-  padding:clamp(20px,2.6vw,28px);display:flex;flex-direction:column;gap:12px;
-}
-.claro .chat,.claro-alt .chat{background:var(--verde-prof)}
-.chat .dia{
-  align-self:center;font-family:var(--sans);font-size:.66rem;letter-spacing:.18em;
-  text-transform:uppercase;color:rgba(245,242,234,.45);margin-bottom:4px;
-}
-.burbuja{
-  font-family:var(--sans);font-size:.88rem;line-height:1.45;padding:13px 17px;max-width:86%;
-}
-.burbuja.de-el{background:rgba(245,242,234,.1);color:var(--marfil);align-self:flex-start}
-.burbuja.nuestra{background:var(--marfil);color:var(--verde-prof);align-self:flex-end}
-.aviso-chat{
-  align-self:center;margin-top:6px;font-family:var(--sans);font-weight:600;font-size:.68rem;
-  letter-spacing:.14em;text-transform:uppercase;color:var(--dorado);
-  border:1px solid rgba(181,154,98,.45);padding:7px 14px;
-}
-
 /* ---------- flujo de 4 pasos ---------- */
 .flujo{display:grid;grid-template-columns:repeat(4,1fr);gap:0;margin-top:48px}
 .nodo{
@@ -416,7 +377,7 @@ footer .marca{
   .fase{grid-template-columns:1fr;gap:14px}
 }
 @media(max-width:860px){
-  .calc,.piezas,.modulo,.flujo,.bonus-lista{grid-template-columns:1fr}
+  .calc,.piezas,.flujo,.bonus-lista{grid-template-columns:1fr}
   .bonus-caja + .bonus-caja{border-left:1px solid rgba(11,59,46,.16);border-top:none}
   .comparativa .cab,.comparativa .fila{grid-template-columns:1fr 34px 1fr}
   .comparativa .antes,.comparativa .despues{font-size:.86rem;padding:14px 16px}
@@ -555,27 +516,14 @@ footer .marca{
   <div class="wrap">
     <div class="kicker rv">04 — Pieza 02</div>
     <h2 class="rv d1">El agente por WhatsApp.</h2>
-    <p class="lead rv d2">En el canal por el que tus clientes ya te escriben hoy.</p>
+    <p class="lead rv d2">En el canal por el que tus clientes ya te escriben hoy. Responde lo rutinario y deriva lo jurídico.</p>
 
-    <div class="modulo rv d2">
-      <div>
-        <h3>Responde lo rutinario. Deriva lo jurídico.</h3>
-        <ul>
-          <li>Contesta con la información que ya existe: estado, último trámite, próxima fecha.</li>
-          <li>Cuando la consulta pide criterio, se detiene y la pasa al abogado responsable.</li>
-          <li>No aproxima ni da consejo jurídico. Es una regla de diseño, no una preferencia.</li>
-          <li>Puedes leer todo lo que ha contestado desde el primer día.</li>
-        </ul>
-      </div>
-      <div class="chat">
-        <div class="dia">Hoy</div>
-        <div class="burbuja de-el">Buenas tardes, ¿hay novedades en mi asunto?</div>
-        <div class="burbuja nuestra">El juzgado ha acordado la apertura de juicio oral. Ya está publicado en tu portal.</div>
-        <div class="burbuja de-el">¿Y me conviene aceptar la conformidad?</div>
-        <div class="burbuja nuestra">Eso lo valora tu abogado. Le paso tu consulta ahora mismo.</div>
-        <div class="aviso-chat">Derivado al abogado responsable</div>
-      </div>
-    </div>
+    <ul class="lista rv d2">
+      <li><strong>Contesta con la información que ya existe</strong>: estado del asunto, último trámite, próxima fecha.</li>
+      <li><strong>Cuando la consulta pide criterio, se detiene</strong> y la pasa al abogado responsable.</li>
+      <li><strong>No aproxima ni da consejo jurídico.</strong> Es una regla de diseño, no una preferencia.</li>
+      <li><strong>Puedes leer todo lo que ha contestado</strong> desde el primer día.</li>
+    </ul>
   </div>
 </section>
 
