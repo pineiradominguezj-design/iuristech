@@ -152,10 +152,9 @@ em{font-style:italic}
 }
 .visible .peldano .barra{transform:scaleX(1)}
 .peldano:nth-child(1) .barra{width:6%}
-.peldano:nth-child(2) .barra{width:14%;transition-delay:.1s}
-.peldano:nth-child(3) .barra{width:32%;transition-delay:.2s}
-.peldano:nth-child(4) .barra{width:60%;transition-delay:.3s}
-.peldano:nth-child(5) .barra{width:100%;background:var(--dorado);transition-delay:.4s}
+.peldano:nth-child(2) .barra{width:20%;transition-delay:.1s}
+.peldano:nth-child(3) .barra{width:48%;transition-delay:.2s}
+.peldano:nth-child(4) .barra{width:100%;background:var(--dorado);transition-delay:.3s}
 .peldano .cifra{
   font-family:var(--sans);font-weight:700;font-size:clamp(1.05rem,1.9vw,1.4rem);
   color:var(--blanco);letter-spacing:-.01em;white-space:nowrap;
@@ -226,18 +225,7 @@ input[type=range]::-moz-range-thumb{
 .out-linea.euro .v{color:var(--blanco)}
 .calc-nota{margin-top:22px}
 
-/* ---------- 05 burbujas ---------- */
-.burbujas{display:flex;flex-direction:column;gap:14px;margin:44px 0 52px;max-width:600px}
-.burbuja{
-  align-self:flex-start;background:var(--blanco);color:var(--marron);
-  padding:15px 22px;border-radius:2px 16px 16px 16px;
-  font-size:1.02rem;line-height:1.4;box-shadow:0 1px 0 rgba(0,0,0,.28);
-  max-width:88%;
-}
-.oscuro .burbuja{background:rgba(245,242,234,.94)}
-.burbuja:nth-child(even){align-self:flex-end;border-radius:16px 2px 16px 16px}
-
-/* ---------- 06 columnas ---------- */
+/* ---------- 05 columnas ---------- */
 .columnas{display:grid;grid-template-columns:1fr 1fr;gap:0;margin:48px 0 0;border:1px solid rgba(11,59,46,.16)}
 .col{padding:clamp(28px,3.2vw,42px)}
 .col:first-child{border-right:1px solid rgba(11,59,46,.16);background:var(--blanco)}
@@ -263,6 +251,15 @@ input[type=range]::-moz-range-thumb{
   margin-top:26px;padding-top:20px;border-top:1px solid rgba(11,59,46,.16);
   font-size:.94rem;line-height:1.5;color:var(--gris);font-style:italic;
 }
+.oscuro .columnas{border-color:rgba(245,242,234,.18)}
+.oscuro .col:first-child{border-right-color:rgba(245,242,234,.18);background:rgba(245,242,234,.07)}
+.oscuro .col:last-child{background:transparent}
+.oscuro .col-tit{color:var(--blanco)}
+.oscuro .col-sub{color:rgba(245,242,234,.5);opacity:1}
+.oscuro .col li{border-bottom-color:rgba(245,242,234,.12);color:rgba(245,242,234,.9)}
+.oscuro .col li::before{background:rgba(245,242,234,.6);opacity:1}
+.oscuro .col:last-child li::before{background:var(--dorado);opacity:1}
+.oscuro .col-pie{border-top-color:rgba(245,242,234,.18);color:rgba(245,242,234,.6)}
 .regla{
   margin-top:44px;padding:32px 38px;background:var(--verde);color:var(--blanco);
 }
@@ -272,45 +269,7 @@ input[type=range]::-moz-range-thumb{
 }
 .regla p + p{margin-top:12px;font-weight:400;font-size:.98rem;color:rgba(252,251,248,.72)}
 
-/* ---------- 07 antes/después ---------- */
-.pivote{
-  margin:44px 0;padding:32px 0;border-top:1px solid rgba(245,242,234,.18);
-  border-bottom:1px solid rgba(245,242,234,.18);
-}
-.pivote p{
-  font-family:var(--sans);font-weight:600;font-size:clamp(1.3rem,2.7vw,2rem);
-  line-height:1.25;color:var(--blanco);margin:0;letter-spacing:-.015em;max-width:30ch;
-}
-.flujos{display:grid;grid-template-columns:1fr 1fr;gap:clamp(20px,3vw,40px);margin-top:44px}
-.flujo{padding:30px 32px;background:rgba(245,242,234,.05);border:1px solid rgba(245,242,234,.13)}
-.flujo.despues{background:rgba(245,242,234,.09);border-color:rgba(245,242,234,.3)}
-.flujo-tit{
-  font-family:var(--sans);font-weight:600;font-size:.76rem;letter-spacing:.2em;
-  text-transform:uppercase;color:rgba(245,242,234,.5);margin-bottom:22px;
-}
-.flujo.despues .flujo-tit{color:rgba(245,242,234,.82)}
-.flujo ol{list-style:none;counter-reset:f}
-.flujo li{
-  counter-increment:f;padding:9px 0 9px 24px;position:relative;
-  font-size:.98rem;line-height:1.45;color:rgba(245,242,234,.88);
-}
-.flujo li::before{
-  content:"→";position:absolute;left:0;top:9px;color:rgba(245,242,234,.32);font-size:.9rem;
-}
-.flujo .bucle{
-  margin-top:18px;padding-top:16px;border-top:1px solid rgba(245,242,234,.13);
-  font-family:var(--sans);font-size:.88rem;font-style:normal;color:rgba(245,242,234,.6);
-}
-.flujo.despues .bucle{color:rgba(245,242,234,.82)}
-.cierre-07{margin-top:56px}
-.cierre-07 .frase{
-  font-family:var(--sans);font-weight:700;
-  font-size:clamp(1.5rem,3.4vw,2.5rem);line-height:1.18;letter-spacing:-.02em;
-  color:var(--blanco);margin-bottom:20px;max-width:17ch;
-}
-.cierre-07 p{color:rgba(245,242,234,.68);font-size:1.05rem;margin:0;max-width:42ch}
-
-/* ---------- 08 cierre ---------- */
+/* ---------- 06 cierre ---------- */
 #cierre{padding-bottom:clamp(56px,8vh,90px)}
 .dos-preguntas{list-style:none;margin:36px 0 40px;max-width:640px}
 .dos-preguntas li{
@@ -353,13 +312,13 @@ footer .marca{
 
 /* ---------- responsive ---------- */
 @media(max-width:860px){
-  .calc,.columnas,.flujos{grid-template-columns:1fr}
+  .calc,.columnas{grid-template-columns:1fr}
   .calc-inputs{border-right:none;border-bottom:1px solid rgba(11,59,46,.12)}
   .col:first-child{border-right:none;border-bottom:1px solid rgba(11,59,46,.16)}
+  .oscuro .col:first-child{border-right:none;border-bottom:1px solid rgba(245,242,234,.18)}
   .peldano{grid-template-columns:1fr;gap:10px;padding:18px 0}
   .peldano .barra{display:none}
   .peldano .glosa{margin-left:0;flex:1 0 100%;font-size:.9rem}
-  .burbuja{max-width:100%}
 }
 @media(prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
@@ -379,7 +338,7 @@ footer .marca{
     <div class="hero-eyebrow">Entregable 01 · El coste de las pequeñas consultas</div>
     <h1>¿Cuánto tiempo dedica tu despacho a responder preguntas que no necesitan al abogado?</h1>
     <p class="hero-sub">No hablamos de asesorar. Hablamos de contestar «¿hay alguna novedad?».</p>
-    <div class="hero-meta">Cuatro minutos de lectura · Con una calculadora para tus propios números</div>
+    <div class="hero-meta">Dos minutos de lectura · Con una calculadora para tus propios números</div>
     <div class="scroll-cue"></div>
   </div>
 </section>
@@ -389,21 +348,19 @@ footer .marca{
   <div class="wrap narrow">
     <div class="kicker rv">02 — El problema invisible</div>
     <h2 class="rv d1">Una consulta de dos minutos casi nunca dura dos minutos.</h2>
-    <p class="lead rv d2">Entra un mensaje. «¿Cómo va lo mío?» Es la pregunta más sencilla que vas a leer hoy. Pero entre esa pregunta y tu respuesta hay una cadena de tareas que no le cobras a nadie:</p>
+    <p class="lead rv d2">Entra un mensaje: «¿Cómo va lo mío?». Entre esa pregunta y tu respuesta hay una cadena de tareas que no le cobras a nadie:</p>
 
     <ol class="cadena rv d2">
       <li class="acento">Dejas lo que estabas haciendo.</li>
-      <li>Identificas de qué cliente se trata.</li>
-      <li>Localizas el expediente correcto.</li>
-      <li>Recuperas el contexto: qué pasó, qué se pidió, qué se contestó.</li>
-      <li>Abres el gestor del despacho para confirmar el estado real.</li>
-      <li>Redactas una respuesta breve y tranquilizadora.</li>
-      <li class="acento">Vuelves a lo que estabas haciendo. Y buscas por dónde ibas.</li>
+      <li>Localizas el expediente y recuperas el contexto.</li>
+      <li>Abres el gestor para confirmar el estado real.</li>
+      <li>Redactas una respuesta breve.</li>
+      <li class="acento">Vuelves a lo que estabas. Y buscas por dónde ibas.</li>
     </ol>
 
     <div class="remate rv">
-      <p class="grande">El coste real no está en el paso 6. Está en el 1 y en el 7.</p>
-      <p>Contestar cuesta dos minutos. Volver a donde estabas cuesta bastante más: recuperar la concentración sobre un escrito a medio redactar no es gratis. Y ninguno de esos minutos aparece en el parte de horas.</p>
+      <p class="grande">El coste real no está en el paso 4. Está en el 1 y en el 5.</p>
+      <p>Contestar cuesta dos minutos. Recuperar la concentración sobre un escrito a medio redactar cuesta bastante más. Y ninguno de esos minutos aparece en el parte de horas.</p>
       <p><strong>Por eso el problema no se corrige: porque no se mide.</strong></p>
     </div>
   </div>
@@ -414,7 +371,7 @@ footer .marca{
   <div class="wrap">
     <div class="kicker rv">03 — La suma</div>
     <h2 class="rv d1">Cinco minutos no son nada.<br>El problema es que nunca son cinco minutos.</h2>
-    <p class="lead rv d2" style="max-width:60ch">Un despacho pequeño con volumen suele recibir entre <strong>10 y 20 consultas de estado</strong> a la semana, y cada una se lleva entre <strong>5 y 10 minutos</strong>. Tomemos el punto medio —15 consultas, 6 minutos— y dejemos que el tiempo haga su trabajo.</p>
+    <p class="lead rv d2" style="max-width:60ch">Un despacho pequeño con volumen recibe entre <strong>10 y 20 consultas de estado</strong> a la semana, de <strong>5 a 10 minutos</strong> cada una. Punto medio: 15 consultas, 6 minutos.</p>
 
     <div class="escalera rv">
       <div class="peldano">
@@ -423,17 +380,6 @@ footer .marca{
           <div class="linea">
             <div class="cifra">6 min</div>
             <div class="glosa">Ni te enteras.</div>
-          </div>
-          <div class="barra"></div>
-        </div>
-      </div>
-      <div class="peldano">
-        <div class="periodo">Un día</div>
-        <div class="barra-zona">
-          <div class="linea">
-            <div class="cifra">18 min</div>
-            <div class="medida">3 consultas</div>
-            <div class="glosa">Se te olvida antes de comer.</div>
           </div>
           <div class="barra"></div>
         </div>
@@ -478,7 +424,7 @@ footer .marca{
       <p>Nueve días de trabajo al año contestando preguntas. Sin un solo expediente avanzado, sin un solo escrito redactado, sin una sola hora facturable.</p>
     </div>
 
-    <p class="nota rv" style="margin-top:40px">Cálculo sobre 48 semanas laborables y jornadas de 8 horas. Los rangos de partida (10–20 consultas semanales, 5–10 minutos por consulta) son hipótesis de referencia utilizadas para dimensionar el problema, no datos medidos en tu despacho. Para eso está lo que viene ahora.</p>
+    <p class="nota rv" style="margin-top:40px">Cálculo sobre 48 semanas laborables y jornadas de 8 horas. Los rangos de partida son hipótesis de referencia para dimensionar el problema, no datos medidos en tu despacho.</p>
   </div>
 </section>
 
@@ -529,38 +475,12 @@ footer .marca{
   </div>
 </section>
 
-<!-- ============ 05 · LA PREGUNTA INCÓMODA ============ -->
+<!-- ============ 05 · INFORMACIÓN vs CRITERIO ============ -->
 <section class="oscuro">
-  <div class="wrap narrow">
-    <div class="kicker rv">05 — La pregunta incómoda</div>
-    <h2 class="rv d1">De todas esas consultas, ¿cuántas necesitaban de verdad tu criterio jurídico?</h2>
-    <p class="lead rv d2">Estas son las preguntas que llegan a un despacho a lo largo de una semana cualquiera:</p>
-
-    <div class="burbujas rv d2">
-      <div class="burbuja">¿Hay alguna novedad?</div>
-      <div class="burbuja">¿Cómo va mi caso?</div>
-      <div class="burbuja">¿Ha contestado ya la otra parte?</div>
-      <div class="burbuja">¿Tenemos que hacer algo?</div>
-      <div class="burbuja">¿En qué punto está el procedimiento?</div>
-      <div class="burbuja">¿Os llegaron los papeles que mandé?</div>
-    </div>
-
-    <p class="rv"><strong>Léelas otra vez, despacio.</strong></p>
-    <p class="rv">Ninguna te está pidiendo una opinión jurídica. Ninguna te pide que interpretes una norma, que valores un riesgo o que decidas una estrategia. Todas te piden un dato que <em>ya existe</em> y que <em>ya está</em> dentro de tu despacho.</p>
-
-    <div class="remate rv" style="background:rgba(245,242,234,.06);border-left-color:rgba(245,242,234,.45)">
-      <p class="grande" style="color:var(--blanco)">Cobras por criterio. Pero buena parte de tu semana se va en logística de la información.</p>
-      <p style="margin-bottom:0">Y lo incómodo no es que ocurra. Es que, hasta ahora, la única forma de que tu cliente estuviera informado eras tú.</p>
-    </div>
-  </div>
-</section>
-
-<!-- ============ 06 · INFORMACIÓN vs CRITERIO ============ -->
-<section class="claro">
   <div class="wrap">
-    <div class="kicker rv">06 — La separación</div>
+    <div class="kicker rv">05 — La separación</div>
     <h2 class="rv d1">Dentro de lo que hoy llamas «atender al cliente» hay dos cosas distintas.</h2>
-    <p class="lead rv d2" style="max-width:56ch">Toda la filosofía de IURIS.TECH cabe en una línea vertical. Esta:</p>
+    <p class="lead rv d2" style="max-width:56ch">Ninguna de esas consultas te pide una opinión jurídica. Todas te piden un dato que ya existe dentro de tu despacho.</p>
 
     <div class="columnas rv">
       <div class="col">
@@ -570,81 +490,34 @@ footer .marca{
           <li>En qué estado está el expediente</li>
           <li>Qué documentación falta por aportar</li>
           <li>Si ha entrado un escrito o una notificación</li>
-          <li>Cuál es el siguiente paso, ya previsto</li>
           <li>Fechas, plazos y trámites ya fijados</li>
-          <li>Todo lo que se repite consulta tras consulta</li>
         </ul>
-        <div class="col-pie">Esto no necesita que seas tú quien lo diga. Necesita ser correcto, estar actualizado y llegar a tiempo.</div>
+        <div class="col-pie">No necesita que seas tú quien lo diga. Necesita ser correcto, estar actualizado y llegar a tiempo.</div>
       </div>
       <div class="col">
         <div class="col-tit">Criterio jurídico</div>
         <div class="col-sub">Sigue siendo tuyo</div>
         <ul>
-          <li>Asesorar</li>
-          <li>Interpretar</li>
+          <li>Asesorar e interpretar</li>
           <li>Valorar riesgos</li>
           <li>Decidir la estrategia del asunto</li>
           <li>Cualquier respuesta que comprometa al despacho</li>
-          <li>Cualquier caso en el que falte información para responder con seguridad</li>
         </ul>
         <div class="col-pie">Esto no se automatiza. No porque no se pueda intentar, sino porque no se debe.</div>
       </div>
     </div>
 
     <div class="regla rv">
-      <p>La regla es simple y no admite excepciones: sistema para la información, abogado para el criterio.</p>
-      <p>Y cuando no está claro de qué lado cae una pregunta, cae de tu lado. Un sistema que duda no improvisa: te la pasa a ti.</p>
+      <p>Sistema para la información, abogado para el criterio. Y cuando no está claro de qué lado cae una pregunta, cae de tu lado.</p>
+      <p>Tu cliente no quiere hablar contigo: quiere saber qué está pasando. Son dos cosas distintas, y llevamos años atendiéndolas como si fueran la misma.</p>
     </div>
   </div>
 </section>
 
-<!-- ============ 07 · NUEVO PARADIGMA ============ -->
-<section class="oscuro">
-  <div class="wrap">
-    <div class="kicker rv">07 — El cambio de marco</div>
-    <h2 class="rv d1">El objetivo no es responder más rápido.</h2>
-    <p class="lead rv d2" style="max-width:56ch">Responder más rápido sigue dependiendo de ti. Es el mismo trabajo con más prisa: las mismas interrupciones, los mismos siete pasos, la misma vuelta atrás para retomar el hilo. Ganas minutos y pierdes el día.</p>
-
-    <div class="pivote rv">
-      <p>El objetivo es dejar de necesitar al abogado para responder lo que no necesita su criterio.</p>
-    </div>
-
-    <div class="flujos rv">
-      <div class="flujo">
-        <div class="flujo-tit">Antes</div>
-        <ol>
-          <li>El cliente pregunta</li>
-          <li>Tú interrumpes lo que estabas haciendo</li>
-          <li>Consultas el expediente</li>
-          <li>Recuperas el contexto</li>
-          <li>Respondes</li>
-          <li>Vuelves a empezar</li>
-        </ol>
-        <div class="bucle">Y se repite. Quince veces por semana.</div>
-      </div>
-      <div class="flujo despues">
-        <div class="flujo-tit">Después</div>
-        <ol>
-          <li>El cliente pregunta</li>
-          <li>Obtiene la información de su expediente</li>
-          <li>Si la cuestión requiere criterio, llega a ti</li>
-          <li>Y entonces intervienes tú</li>
-        </ol>
-        <div class="bucle">Sigues estando. Pero solo donde hacías falta.</div>
-      </div>
-    </div>
-
-    <div class="cierre-07 rv">
-      <div class="frase">Tu cliente no quiere hablar contigo. Quiere saber qué está pasando.</div>
-      <p>Son dos cosas distintas. Llevamos años atendiéndolas como si fueran la misma.</p>
-    </div>
-  </div>
-</section>
-
-<!-- ============ 08 · CIERRE ============ -->
+<!-- ============ 06 · CIERRE ============ -->
 <section id="cierre" class="claro">
   <div class="wrap narrow">
-    <div class="kicker rv">08 — Antes de vernos</div>
+    <div class="kicker rv">06 — Antes de vernos</div>
     <h2 class="rv d1">El próximo día empezamos por tu número, no por el mío.</h2>
     <p class="lead rv d2">No vamos a abrir la reunión hablando de tecnología. Vamos a abrirla con dos preguntas:</p>
 
