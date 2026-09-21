@@ -290,44 +290,7 @@ em{font-style:italic}
 }
 .f-linea .v.oro{color:var(--dorado)}
 
-/* ---------- 06 rutas ---------- */
-.rutas{margin:48px 0 0}
-.ruta{padding:28px 0;border-top:1px solid rgba(11,59,46,.16)}
-.ruta:last-child{border-bottom:1px solid rgba(11,59,46,.16)}
-.ruta-et{
-  font-family:var(--sans);font-weight:600;font-size:.72rem;letter-spacing:.2em;
-  text-transform:uppercase;color:var(--gris);opacity:.7;margin-bottom:18px;
-}
-.ruta.destacada .ruta-et{color:var(--verde);opacity:1}
-.cadena-h{display:flex;flex-wrap:wrap;align-items:center;gap:10px 12px}
-.chip{
-  font-family:var(--sans);font-weight:500;font-size:.92rem;padding:10px 17px;
-  background:var(--blanco);border:1px solid rgba(11,59,46,.2);color:var(--verde);white-space:nowrap;
-}
-.chip.sistema{background:var(--verde);border-color:var(--verde);color:var(--blanco);font-weight:600}
-.chip.humano{border-color:rgba(11,59,46,.45);border-width:1px;font-weight:600}
-.chip.destino{background:rgba(11,59,46,.06)}
-.fl{font-family:var(--sans);font-size:1rem;color:var(--verde);opacity:.4}
-.ruta-pie{margin-top:18px;font-size:.96rem;line-height:1.5;color:var(--gris);font-style:italic;max-width:62ch}
-
-/* ---------- 07 pivote y cierre ---------- */
-.pivote{
-  margin:44px 0;padding:32px 0;border-top:1px solid rgba(245,242,234,.18);
-  border-bottom:1px solid rgba(245,242,234,.18);
-}
-.pivote p{
-  font-family:var(--sans);font-weight:600;font-size:clamp(1.3rem,2.7vw,2rem);
-  line-height:1.25;color:var(--blanco);margin:0;letter-spacing:-.015em;max-width:32ch;
-}
-.cierre-07{margin-top:56px}
-.cierre-07 .frase{
-  font-family:var(--sans);font-weight:700;
-  font-size:clamp(1.5rem,3.4vw,2.5rem);line-height:1.18;letter-spacing:-.02em;
-  color:var(--blanco);margin-bottom:20px;max-width:19ch;
-}
-.cierre-07 p{color:rgba(245,242,234,.68);font-size:1.05rem;margin:0;max-width:44ch}
-
-/* ---------- 08 cierre ---------- */
+/* ---------- 06 cierre ---------- */
 #cierre{padding-bottom:clamp(56px,8vh,90px)}
 .dos-preguntas{list-style:none;margin:36px 0 40px;max-width:660px}
 .dos-preguntas li{
@@ -397,7 +360,7 @@ footer .marca{
     <div class="hero-eyebrow">Entregable 02 · Qué puede hacer realmente una IA en un despacho</div>
     <h1>«No me fío de que una IA hable con mis clientes. ¿Y si responde algo que no debe?»</h1>
     <p class="hero-sub">Es la objeción correcta. Y la respuesta no es «tranquilo, eso no va a pasar».</p>
-    <div class="hero-meta">Cinco minutos de lectura · Con el mecanismo de escalado explicado paso a paso</div>
+    <div class="hero-meta">Tres minutos de lectura · Con el mecanismo de escalado explicado paso a paso</div>
     <div class="scroll-cue"></div>
   </div>
 </section>
@@ -407,20 +370,17 @@ footer .marca{
   <div class="wrap narrow">
     <div class="kicker rv">02 — La pregunta que preocupa</div>
     <h2 class="rv d1">¿Qué pasa si mi cliente le pregunta algo que no debería responder?</h2>
-    <p class="lead rv d2">Es la primera pregunta que aparece en cuanto se menciona la palabra «IA» dentro de un despacho. No la vamos a esquivar ni la vamos a suavizar, porque es exactamente la pregunta que hay que hacer.</p>
-    <p class="rv d2">Detrás de esa frase hay miedos muy concretos. Conviene ponerlos por escrito, uno a uno:</p>
+    <p class="lead rv d2">No la vamos a esquivar: detrás de esa frase hay miedos muy concretos.</p>
 
     <ul class="temores rv d2">
       <li>Que suelte una opinión jurídica que nadie le ha pedido.</li>
       <li>Que interprete un plazo y se equivoque.</li>
-      <li>Que tranquilice a un cliente cuando no había motivo para tranquilizarlo.</li>
       <li>Que diga algo que mañana comprometa al despacho.</li>
       <li>Que el cliente se quede convencido de que ha hablado con su abogado.</li>
     </ul>
 
     <div class="remate rv">
-      <p class="grande">Ninguno de esos miedos es exagerado. Todos describen algo que un sistema mal diseñado haría.</p>
-      <p>La diferencia entre una herramienta que da miedo y una que puede entrar en un despacho no está en lo lista que sea. Está en lo que tiene <em>prohibido</em> hacer.</p>
+      <p class="grande">Ninguno es exagerado. Todos describen algo que un sistema mal diseñado haría.</p>
       <p><strong>Por eso no empezamos definiendo qué puede hacer. Empezamos definiendo qué no va a hacer nunca.</strong></p>
     </div>
   </div>
@@ -431,19 +391,17 @@ footer .marca{
   <div class="wrap">
     <div class="kicker rv">03 — La frontera</div>
     <h2 class="rv d1">Todo depende de dónde esté la línea.<br>Esta es la nuestra.</h2>
-    <p class="lead rv d2" style="max-width:58ch">No es una frontera difusa ni una cuestión de confiar y cruzar los dedos. Es una lista cerrada, escrita antes de que el sistema atienda a nadie.</p>
+    <p class="lead rv d2" style="max-width:58ch">No es una frontera difusa. Es una lista cerrada, escrita antes de que el sistema atienda a nadie.</p>
 
     <div class="columnas rv">
       <div class="col">
         <div class="col-tit">La IA puede</div>
         <div class="col-sub">Terreno de la información</div>
         <ul>
-          <li>Informar del estado disponible del expediente</li>
-          <li>Recuperar información ya autorizada por el despacho</li>
+          <li>Informar del estado del expediente</li>
           <li>Responder consultas rutinarias y repetidas</li>
           <li>Indicar qué documentación falta por aportar</li>
           <li>Confirmar fechas, plazos y trámites ya fijados</li>
-          <li>Avisar de que ha entrado un escrito o una notificación</li>
         </ul>
         <div class="col-pie">Nada de esto se inventa. Son datos que ya existen dentro de tu despacho: el sistema los consulta y los transmite.</div>
       </div>
@@ -453,18 +411,16 @@ footer .marca{
         <ul>
           <li>Interpretar jurídicamente un caso</li>
           <li>Decidir o sugerir una estrategia</li>
-          <li>Valorar riesgos jurídicos</li>
-          <li>Anticipar el resultado de un procedimiento</li>
-          <li>Sustituir el criterio profesional</li>
+          <li>Valorar riesgos o anticipar un resultado</li>
           <li>Responder cuando la información no es concluyente</li>
         </ul>
-        <div class="col-pie">Fíjate en el verbo: no decimos «no puede», decimos «no debe». No es una limitación técnica que algún día se arregle. Es una regla de diseño.</div>
+        <div class="col-pie">Fíjate en el verbo: no decimos «no puede», decimos «no debe». No es una limitación técnica. Es una regla de diseño.</div>
       </div>
     </div>
 
     <div class="regla rv">
       <p>Sistema para la información. Abogado para el criterio. Y cuando no está claro de qué lado cae una pregunta, cae de tu lado.</p>
-      <p>Esa frontera no la fija el proveedor ni la fija el software: la fijas tú, por escrito, antes de empezar. Y se puede mover el día que decidas moverla.</p>
+      <p>Esa frontera la fijas tú, por escrito, antes de empezar. Y se puede mover el día que decidas moverla.</p>
     </div>
   </div>
 </section>
@@ -474,7 +430,7 @@ footer .marca{
   <div class="wrap">
     <div class="kicker rv">04 — El mecanismo de escalado</div>
     <h2 class="rv d1">Lo que parecía el riesgo es, en realidad, la garantía.</h2>
-    <p class="lead rv d2" style="max-width:60ch">La pregunta no es si algún día llegará una consulta que el sistema no debe responder. Llegará, y llegará pronto. La pregunta es qué ocurre exactamente en ese momento. Ocurre esto:</p>
+    <p class="lead rv d2" style="max-width:60ch">Llegará una consulta que el sistema no debe responder. La pregunta es qué ocurre exactamente en ese momento. Ocurre esto:</p>
 
     <div class="diagrama rv">
       <div class="nodo">
@@ -515,21 +471,21 @@ footer .marca{
     <div class="tres rv">
       <div>
         <h3>La duda escala</h3>
-        <p>No hay respuestas «a medias». Si el sistema no está seguro de que la consulta cae dentro de la frontera, no la responde: te la pasa. La duda siempre viaja hacia arriba.</p>
+        <p>No hay respuestas «a medias». Si el sistema no está seguro, no responde: te la pasa.</p>
       </div>
       <div>
         <h3>Todo queda registrado</h3>
-        <p>Ves qué se ha respondido, qué se ha derivado y por qué. La automatización no es una caja negra: es un tramo del trabajo que puedes auditar cuando quieras.</p>
+        <p>Ves qué se ha respondido, qué se ha derivado y por qué. No es una caja negra.</p>
       </div>
       <div>
         <h3>La frontera es tuya</h3>
-        <p>Se define contigo al principio y se ajusta cuando lo pidas. Si un tipo de consulta te incomoda, sale de la lista y pasa a escalar siempre.</p>
+        <p>Se define contigo y se ajusta cuando lo pidas. Si un tipo de consulta te incomoda, pasa a escalar siempre.</p>
       </div>
     </div>
 
     <div class="remate rv">
       <p class="grande">Un sistema que reconoce que no debe responder no es un sistema que falla. Es un sistema funcionando.</p>
-      <p>El escalado no es el plan B para cuando algo sale mal. Es la pieza central del diseño: lo que permite que el resto pueda automatizarse con tranquilidad.</p>
+      <p>El escalado no es el plan B. Es la pieza central del diseño: lo que permite que el resto pueda automatizarse con tranquilidad.</p>
     </div>
   </div>
 </section>
@@ -550,8 +506,7 @@ footer .marca{
         <div class="burbuja"><span class="quien">Cliente</span>Buenos días. ¿Cómo va mi expediente?</div>
       </div>
       <div class="ficha">
-        <div class="f-linea"><span class="k">Qué está pidiendo</span><span class="v">Un dato que ya existe</span></div>
-        <div class="f-linea"><span class="k">De qué lado cae</span><span class="v">Información</span></div>
+        <div class="f-linea"><span class="k">De qué lado cae</span><span class="v">Información: un dato que ya existe</span></div>
         <div class="f-linea"><span class="k">Qué hace el sistema</span><span class="v">Consulta el expediente y contesta: estado actual, último trámite, documentación pendiente y siguiente paso previsto</span></div>
         <div class="f-linea"><span class="k">Tu intervención</span><span class="v">Ninguna</span></div>
       </div>
@@ -566,8 +521,7 @@ footer .marca{
         <div class="burbuja"><span class="quien">Cliente</span>Vale, gracias. Y para contestar a esto, ¿qué estrategia me recomienda?</div>
       </div>
       <div class="ficha">
-        <div class="f-linea"><span class="k">Qué está pidiendo</span><span class="v">Criterio jurídico</span></div>
-        <div class="f-linea"><span class="k">De qué lado cae</span><span class="v oro">Fuera de la frontera</span></div>
+        <div class="f-linea"><span class="k">De qué lado cae</span><span class="v oro">Criterio jurídico: fuera de la frontera</span></div>
         <div class="f-linea"><span class="k">Qué hace el sistema</span><span class="v">No interpreta, no sugiere y no adelanta nada. Le indica que esa consulta la atiende su abogado y te la traslada con el hilo completo</span></div>
         <div class="f-linea"><span class="k">Tu intervención</span><span class="v oro">Aquí sí. Y solo aquí</span></div>
       </div>
@@ -575,85 +529,15 @@ footer .marca{
 
     <div class="remate rv">
       <p class="grande">El cliente no percibe un muro. Percibe orden.</p>
-      <p>Unas cosas se contestan al instante y otras las contesta su abogado. Que es, exactamente, como debería haber funcionado siempre.</p>
-      <p style="margin-bottom:0">Y tú ves con precisión dónde termina la automatización. No es una zona gris que haya que vigilar: es una línea que puedes leer.</p>
+      <p style="margin-bottom:0">Unas cosas se contestan al instante y otras las contesta su abogado. Y tú ves con precisión dónde termina la automatización: no es una zona gris, es una línea que puedes leer.</p>
     </div>
   </div>
 </section>
 
-<!-- ============ 06 · EL NUEVO MODELO ============ -->
-<section class="claro">
-  <div class="wrap">
-    <div class="kicker rv">06 — El nuevo modelo</div>
-    <h2 class="rv d1">Lo que cambia no es quién decide. Es por dónde pasa cada cosa.</h2>
-    <p class="lead rv d2" style="max-width:58ch">Hoy todo circula por la misma vía, y esa vía eres tú. Después hay dos, y solo una de ellas te necesita.</p>
-
-    <div class="rutas rv">
-      <div class="ruta">
-        <div class="ruta-et">Antes</div>
-        <div class="cadena-h">
-          <span class="chip">Cliente</span><span class="fl">→</span>
-          <span class="chip humano">Abogado</span><span class="fl">→</span>
-          <span class="chip">Expediente</span><span class="fl">→</span>
-          <span class="chip destino">Respuesta</span>
-        </div>
-        <div class="ruta-pie">Toda respuesta, sin distinguir si necesita criterio o no, atraviesa el único recurso que no puedes multiplicar.</div>
-      </div>
-
-      <div class="ruta destacada">
-        <div class="ruta-et">Después · Consulta de información</div>
-        <div class="cadena-h">
-          <span class="chip">Cliente</span><span class="fl">→</span>
-          <span class="chip sistema">IURIS.TECH</span><span class="fl">→</span>
-          <span class="chip">Información disponible</span><span class="fl">→</span>
-          <span class="chip destino">Respuesta</span>
-        </div>
-        <div class="ruta-pie">La mayoría del volumen sale de tu mesa. No porque alguien decida por ti, sino porque no había nada que decidir.</div>
-      </div>
-
-      <div class="ruta destacada">
-        <div class="ruta-et">Después · Cuando requiere criterio</div>
-        <div class="cadena-h">
-          <span class="chip">Cliente</span><span class="fl">→</span>
-          <span class="chip sistema">IURIS.TECH</span><span class="fl">→</span>
-          <span class="chip humano">Abogado</span>
-        </div>
-        <div class="ruta-pie">La consulta llega igual que antes, pero llega filtrada, con contexto y sin haber interrumpido tu mañana quince veces.</div>
-      </div>
-    </div>
-
-    <div class="regla rv">
-      <p>Sigues en el circuito. Dejas de ser el cuello de botella de la información.</p>
-      <p>Ningún cliente pierde acceso a su abogado. Lo que pierde es la espera para saber si le han llegado los papeles.</p>
-    </div>
-  </div>
-</section>
-
-<!-- ============ 07 · LO QUE PROTEGEMOS ============ -->
-<section class="oscuro">
-  <div class="wrap">
-    <div class="kicker rv">07 — Lo que estamos protegiendo</div>
-    <h2 class="rv d1">Esto no va de que hables menos con tus clientes.</h2>
-    <p class="lead rv d2" style="max-width:58ch">Cuando un cliente te escribe cinco veces para saber si ha entrado un escrito, esa relación no se está fortaleciendo. Se está gastando en logística.</p>
-
-    <div class="pivote rv">
-      <p>La confianza no se construye contestando rápido. Se construye cuando hablas y aportas criterio.</p>
-    </div>
-
-    <p class="rv">Cada conversación que dedicas a confirmar un dato es una conversación que no dedicas al asunto. Y el cliente, aunque no sepa ponerlo en palabras, también lo nota: le respondes deprisa, entre dos cosas, con la cabeza en otro expediente.</p>
-    <p class="rv">Cuando la información fluye sola, lo que queda entre vosotros es lo que de verdad justifica que te haya contratado.</p>
-
-    <div class="cierre-07 rv">
-      <div class="frase">No queremos sustituir la relación entre abogado y cliente.</div>
-      <p>Queremos protegerla de las tareas que no necesitan al abogado.</p>
-    </div>
-  </div>
-</section>
-
-<!-- ============ 08 · CIERRE ============ -->
+<!-- ============ 06 · CIERRE ============ -->
 <section id="cierre" class="claro">
   <div class="wrap narrow">
-    <div class="kicker rv">08 — Antes de vernos</div>
+    <div class="kicker rv">06 — Antes de vernos</div>
     <h2 class="rv d1">El próximo día dibujamos tu frontera.</h2>
     <p class="lead rv d2">No vamos a hablar de tecnología. Vamos a hacer una lista contigo, en dos columnas, con dos preguntas:</p>
 
@@ -665,10 +549,10 @@ footer .marca{
     <p class="subrayado rv">Todo lo que caiga en la primera columna es lo que IURIS.TECH puede quitarte de encima. Lo segundo sigue siendo tuyo, íntegro y sin matices.</p>
 
     <div class="recordatorio rv">
-      <p>Y si dudas de dónde cae una pregunta, no la coloques: tráela sin clasificar. Esas son las interesantes, y para esas ya sabes lo que hace <a href="#mecanismo">el mecanismo</a>: escalar.</p>
+      <p>Y si dudas de dónde cae una pregunta, tráela sin clasificar. Esas son las interesantes, y ya sabes lo que hace <a href="#mecanismo">el mecanismo</a>: escalar.</p>
     </div>
 
-    <p class="nota rv" style="margin-top:40px">Este documento describe el diseño funcional del sistema: qué se automatiza, qué no y qué ocurre en el límite entre ambas cosas. El alcance concreto se define despacho a despacho, por escrito, antes de la puesta en marcha.</p>
+    <p class="nota rv" style="margin-top:40px">Este documento describe el diseño funcional del sistema. El alcance concreto se define despacho a despacho, por escrito, antes de la puesta en marcha.</p>
   </div>
 </section>
 
