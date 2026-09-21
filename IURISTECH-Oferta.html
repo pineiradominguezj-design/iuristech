@@ -136,24 +136,6 @@ em{font-style:italic}
 .pieza .solo{font-family:var(--sans);font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--dorado-osc)}
 
 /* ---------- antes / después ---------- */
-.columnas{display:grid;grid-template-columns:1fr 1fr;gap:0;margin-top:48px;border:1px solid rgba(245,242,234,.18)}
-.col{padding:clamp(26px,3vw,38px)}
-.col:first-child{border-right:1px solid rgba(245,242,234,.18)}
-.col:last-child{background:rgba(245,242,234,.05)}
-.col-sub{
-  font-family:var(--sans);font-weight:600;font-size:.72rem;letter-spacing:.18em;
-  text-transform:uppercase;color:rgba(245,242,234,.55);margin-bottom:20px;
-}
-.col:last-child .col-sub{color:var(--dorado)}
-.col ul{list-style:none}
-.col li{
-  padding:14px 0 14px 24px;position:relative;font-size:1rem;line-height:1.5;
-  color:rgba(245,242,234,.88);border-bottom:1px solid rgba(245,242,234,.12);
-}
-.col li:last-child{border-bottom:none;padding-bottom:0}
-.col li::before{content:"";position:absolute;left:0;top:24px;width:11px;height:1px;background:rgba(245,242,234,.45)}
-.col:last-child li::before{background:var(--dorado)}
-
 /* ---------- calculadora ---------- */
 .calc{
   margin-top:48px;background:var(--blanco);border:1px solid rgba(11,59,46,.16);
@@ -208,65 +190,184 @@ input[type=range]:focus-visible{outline:2px solid var(--dorado-osc);outline-offs
 .out-linea .k{font-family:var(--sans);font-size:.82rem;color:rgba(245,242,234,.6);line-height:1.3}
 .out-linea .v{font-family:var(--sans);font-weight:700;font-size:1.2rem;color:var(--blanco);white-space:nowrap}
 
-/* ---------- planes ---------- */
-.planes{display:grid;grid-template-columns:repeat(3,1fr);gap:0;margin-top:52px;align-items:start}
-.plan{
-  background:var(--marfil);border:1px solid rgba(11,59,46,.16);
-  padding:clamp(24px,2.6vw,32px);
+/* ---------- situación actual ---------- */
+.citas{display:flex;flex-wrap:wrap;gap:12px;margin-top:40px}
+.cita{
+  font-family:var(--sans);font-size:.92rem;line-height:1.35;
+  padding:13px 20px;border:1px solid rgba(245,242,234,.22);
+  color:rgba(245,242,234,.92);background:rgba(245,242,234,.05);
 }
-.plan + .plan{border-left:none}
-.plan.destacado{
-  background:var(--verde);border-color:var(--verde);color:var(--blanco);
-  margin:-18px 0;padding-top:calc(clamp(24px,2.6vw,32px) + 18px);
-  padding-bottom:calc(clamp(24px,2.6vw,32px) + 18px);
+.claro .cita,.claro-alt .cita{border-color:rgba(11,59,46,.18);background:var(--blanco);color:var(--gris)}
+.cadena{display:flex;flex-wrap:wrap;align-items:center;gap:10px 12px;margin-top:40px}
+.eslabon{
+  font-family:var(--sans);font-weight:500;font-size:.78rem;letter-spacing:.02em;
+  padding:9px 15px;border:1px solid rgba(181,154,98,.45);color:var(--marfil);
 }
-.plan-tag{
+.claro .eslabon,.claro-alt .eslabon{border-color:rgba(11,59,46,.2);color:var(--verde)}
+.cadena .sep{font-family:var(--sans);color:var(--dorado);font-size:.9rem}
+
+/* ---------- pieza en detalle ---------- */
+.modulo{display:grid;grid-template-columns:1fr 1fr;gap:clamp(32px,5vw,64px);margin-top:48px;align-items:center}
+.modulo h3{
+  font-family:var(--sans);font-weight:600;font-size:clamp(1.2rem,2.2vw,1.5rem);
+  color:var(--verde);line-height:1.25;margin-bottom:16px;letter-spacing:-.01em;
+}
+.oscuro .modulo h3{color:var(--blanco)}
+.modulo ul{list-style:none;margin-top:22px}
+.modulo li{
+  font-family:var(--sans);font-size:.9rem;line-height:1.45;color:var(--gris);
+  padding:9px 0 9px 22px;position:relative;
+}
+.oscuro .modulo li{color:rgba(245,242,234,.86)}
+.modulo li::before{
+  content:"";position:absolute;left:0;top:17px;width:11px;height:1px;background:var(--dorado-osc);
+}
+.oscuro .modulo li::before{background:var(--dorado)}
+
+/* ---------- chat de ejemplo ---------- */
+.chat{
+  background:var(--verde-prof);border:1px solid rgba(181,154,98,.35);
+  padding:clamp(20px,2.6vw,28px);display:flex;flex-direction:column;gap:12px;
+}
+.claro .chat,.claro-alt .chat{background:var(--verde-prof)}
+.chat .dia{
+  align-self:center;font-family:var(--sans);font-size:.66rem;letter-spacing:.18em;
+  text-transform:uppercase;color:rgba(245,242,234,.45);margin-bottom:4px;
+}
+.burbuja{
+  font-family:var(--sans);font-size:.88rem;line-height:1.45;padding:13px 17px;max-width:86%;
+}
+.burbuja.de-el{background:rgba(245,242,234,.1);color:var(--marfil);align-self:flex-start}
+.burbuja.nuestra{background:var(--marfil);color:var(--verde-prof);align-self:flex-end}
+.aviso-chat{
+  align-self:center;margin-top:6px;font-family:var(--sans);font-weight:600;font-size:.68rem;
+  letter-spacing:.14em;text-transform:uppercase;color:var(--dorado);
+  border:1px solid rgba(181,154,98,.45);padding:7px 14px;
+}
+
+/* ---------- flujo de 4 pasos ---------- */
+.flujo{display:grid;grid-template-columns:repeat(4,1fr);gap:0;margin-top:48px}
+.nodo{
+  padding:clamp(22px,2.6vw,30px);border:1px solid rgba(245,242,234,.18);
+  border-right:none;background:rgba(245,242,234,.04);
+}
+.nodo:last-child{border-right:1px solid rgba(245,242,234,.18)}
+.claro .nodo,.claro-alt .nodo{border-color:rgba(11,59,46,.16);background:var(--blanco)}
+.claro .nodo:last-child,.claro-alt .nodo:last-child{border-right:1px solid rgba(11,59,46,.16)}
+.nodo .idx{
+  display:block;font-family:var(--sans);font-weight:700;font-size:.68rem;letter-spacing:.2em;
+  color:var(--dorado);margin-bottom:12px;
+}
+.claro .nodo .idx,.claro-alt .nodo .idx{color:var(--dorado-osc)}
+.nodo h3{
+  font-family:var(--sans);font-weight:600;font-size:1rem;line-height:1.3;
+  color:var(--marfil);letter-spacing:-.01em;
+}
+.claro .nodo h3,.claro-alt .nodo h3{color:var(--verde)}
+.nodo p{font-family:var(--sans);font-size:.83rem;line-height:1.45;margin-top:9px;color:rgba(245,242,234,.7)}
+.claro .nodo p,.claro-alt .nodo p{color:var(--gris)}
+
+/* ---------- comparativa ---------- */
+.comparativa{margin-top:48px;border:1px solid rgba(245,242,234,.18)}
+.claro .comparativa,.claro-alt .comparativa{border-color:rgba(11,59,46,.16)}
+.comparativa .cab,.comparativa .fila{display:grid;grid-template-columns:1fr 56px 1fr;align-items:center}
+.comparativa .cab{background:var(--verde);color:var(--blanco)}
+.comparativa .cab > div{
+  font-family:var(--sans);font-weight:600;font-size:.7rem;letter-spacing:.2em;
+  text-transform:uppercase;padding:17px clamp(18px,2.4vw,28px);
+}
+.comparativa .fila{border-top:1px solid rgba(245,242,234,.14)}
+.claro .comparativa .fila,.claro-alt .comparativa .fila{border-top-color:rgba(11,59,46,.12)}
+.comparativa .antes,.comparativa .despues{
+  font-family:var(--sans);font-size:.93rem;line-height:1.4;padding:17px clamp(18px,2.4vw,28px);
+}
+.comparativa .antes{color:rgba(245,242,234,.55)}
+.claro .comparativa .antes,.claro-alt .comparativa .antes{color:var(--gris);opacity:.7}
+.comparativa .despues{color:var(--marfil);font-weight:500}
+.claro .comparativa .despues,.claro-alt .comparativa .despues{color:var(--verde)}
+.comparativa .despues b{font-weight:700}
+.comparativa .flecha{text-align:center;font-family:var(--sans);color:var(--dorado);font-size:.95rem}
+.claro .comparativa .flecha,.claro-alt .comparativa .flecha{color:var(--dorado-osc)}
+
+/* ---------- metodología ---------- */
+.fases{margin-top:48px;display:flex;flex-direction:column}
+.fase{
+  display:grid;grid-template-columns:210px 1fr;gap:clamp(20px,3vw,44px);
+  padding:clamp(24px,2.8vw,34px) 0;border-top:1px solid rgba(11,59,46,.14);
+}
+.oscuro .fase{border-top-color:rgba(245,242,234,.16)}
+.fase:last-child{border-bottom:1px solid rgba(11,59,46,.14)}
+.oscuro .fase:last-child{border-bottom-color:rgba(245,242,234,.16)}
+.fase .et{
+  font-family:var(--sans);font-weight:700;font-size:.92rem;letter-spacing:.04em;color:var(--verde);
+}
+.oscuro .fase .et{color:var(--blanco)}
+.fase .et small{
+  display:block;font-weight:500;font-size:.68rem;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--dorado-osc);margin-top:7px;
+}
+.oscuro .fase .et small{color:var(--dorado)}
+.fase h3{
+  font-family:var(--sans);font-weight:600;font-size:clamp(1.02rem,1.8vw,1.18rem);
+  color:var(--verde);line-height:1.3;margin-bottom:9px;letter-spacing:-.01em;
+}
+.oscuro .fase h3{color:var(--blanco)}
+.fase p{font-size:.98rem;line-height:1.55;color:var(--gris)}
+.oscuro .fase p{color:rgba(245,242,234,.85)}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
+.chips span{
+  font-family:var(--sans);font-size:.72rem;letter-spacing:.03em;padding:6px 12px;
+  border:1px solid rgba(11,59,46,.2);color:var(--gris);
+}
+.oscuro .chips span{border-color:rgba(245,242,234,.24);color:rgba(245,242,234,.8)}
+
+/* ---------- bonus ---------- */
+.pill-mini{
   display:inline-block;font-family:var(--sans);font-weight:600;font-size:.66rem;
   letter-spacing:.16em;text-transform:uppercase;background:var(--dorado);
-  color:var(--verde-prof);padding:4px 11px;margin-bottom:14px;
+  color:var(--verde-prof);padding:5px 12px;margin-bottom:18px;
 }
-.plan-nivel{
-  font-family:var(--sans);font-weight:500;font-size:.68rem;letter-spacing:.18em;
-  text-transform:uppercase;color:var(--gris);margin-bottom:6px;
+.bonus-lista{display:grid;grid-template-columns:1fr 1fr;gap:0;margin-top:48px}
+.bonus-caja{
+  background:var(--blanco);border:1px solid rgba(11,59,46,.16);
+  padding:clamp(26px,3vw,36px);
 }
-.plan.destacado .plan-nivel{color:rgba(252,251,248,.66)}
-.plan-nombre{
-  font-family:var(--sans);font-weight:600;font-size:clamp(1.12rem,1.9vw,1.3rem);
-  color:var(--verde);line-height:1.25;margin-bottom:20px;letter-spacing:-.01em;
+.bonus-caja + .bonus-caja{border-left:none}
+.oscuro .bonus-caja{background:rgba(245,242,234,.05);border-color:rgba(245,242,234,.2)}
+.bonus-caja .sello{
+  display:block;font-family:var(--sans);font-weight:700;font-size:.68rem;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--dorado-osc);margin-bottom:13px;
 }
-.plan.destacado .plan-nombre{color:var(--blanco)}
-.plan-precio{
-  font-family:var(--sans);font-weight:800;font-size:clamp(1.8rem,3.4vw,2.4rem);
-  color:var(--verde);letter-spacing:-.03em;line-height:1;
+.oscuro .bonus-caja .sello{color:var(--dorado)}
+.bonus-caja h3{
+  font-family:var(--sans);font-weight:600;font-size:clamp(1.08rem,1.9vw,1.28rem);
+  color:var(--verde);line-height:1.28;margin-bottom:11px;letter-spacing:-.01em;
 }
-.plan.destacado .plan-precio{color:var(--blanco)}
-.plan-precio-et{
-  font-family:var(--sans);font-weight:500;font-size:.72rem;letter-spacing:.06em;
-  color:var(--gris);margin-top:5px;
+.oscuro .bonus-caja h3{color:var(--blanco)}
+.bonus-caja p{font-size:.98rem;line-height:1.55;color:var(--gris)}
+.oscuro .bonus-caja p{color:rgba(245,242,234,.85)}
+.bonus-caja .entregable{
+  margin-top:16px;padding-top:14px;border-top:1px solid rgba(11,59,46,.14);font-size:.9rem;
 }
-.plan.destacado .plan-precio-et{color:rgba(252,251,248,.66)}
-.plan-mes{margin-top:16px;padding-top:16px;border-top:1px solid rgba(11,59,46,.14)}
-.plan.destacado .plan-mes{border-top-color:rgba(252,251,248,.24)}
-.plan-mes .plan-precio{font-size:clamp(1.3rem,2.4vw,1.7rem)}
-.plan ul{list-style:none;margin-top:22px;padding-top:20px;border-top:1px solid rgba(11,59,46,.14)}
-.plan.destacado ul{border-top-color:rgba(252,251,248,.24)}
-.plan li{
-  font-family:var(--sans);font-size:.85rem;line-height:1.4;color:var(--gris);
-  padding:8px 0 8px 22px;position:relative;
+.oscuro .bonus-caja .entregable{border-top-color:rgba(245,242,234,.18)}
+.bonus-caja .entregable strong{
+  display:block;font-family:var(--sans);font-weight:600;font-size:.68rem;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--verde);margin-bottom:5px;
 }
-.plan.destacado li{color:rgba(252,251,248,.92)}
-.plan li::before{
-  content:"✓";position:absolute;left:0;top:7px;font-family:var(--sans);
-  font-weight:700;font-size:.8rem;color:var(--verde);
-}
-.plan.destacado li::before{color:var(--dorado)}
-.plan li.off{opacity:.42}
-.plan li.off::before{content:"—";font-weight:400}
+.oscuro .bonus-caja .entregable strong{color:var(--dorado)}
 
-.ancla{margin-top:44px;padding:30px 36px;background:var(--marfil);border:1px solid rgba(11,59,46,.18)}
-.claro .ancla{background:var(--blanco)}
-.ancla h3{color:var(--verde);margin-bottom:10px}
-.ancla p{font-size:1rem;line-height:1.6;color:var(--gris)}
+/* ---------- garantías (trío) ---------- */
+.tres-gar{display:grid;grid-template-columns:repeat(3,1fr);gap:0;margin-top:48px}
+.gar-mini{
+  padding:clamp(24px,2.8vw,32px);background:rgba(245,242,234,.07);
+  border:1px solid rgba(181,154,98,.5);border-right:none;
+}
+.gar-mini:last-child{border-right:1px solid rgba(181,154,98,.5)}
+.gar-mini h4{
+  font-family:var(--sans);font-weight:600;font-size:clamp(1.05rem,1.9vw,1.24rem);
+  color:var(--blanco);line-height:1.28;margin-bottom:12px;letter-spacing:-.01em;
+}
+.gar-mini p{font-size:.96rem;line-height:1.55;color:rgba(245,242,234,.85)}
 
 /* ---------- garantía ---------- */
 .garantia{margin-top:48px;padding:clamp(28px,3.2vw,40px);background:rgba(245,242,234,.07);border:1px solid rgba(181,154,98,.5)}
@@ -305,14 +406,21 @@ footer .marca{
 
 /* ---------- responsive ---------- */
 @media(max-width:940px){
-  .planes{grid-template-columns:1fr}
-  .plan + .plan{border-left:1px solid rgba(11,59,46,.16);border-top:none}
-  .plan.destacado{margin:0;padding-top:clamp(24px,2.6vw,32px);padding-bottom:clamp(24px,2.6vw,32px)}
+  .flujo{grid-template-columns:1fr 1fr}
+  .nodo{border-right:1px solid rgba(245,242,234,.18)}
+  .nodo:nth-child(-n+2){border-bottom:none}
+  .claro .nodo,.claro-alt .nodo{border-right-color:rgba(11,59,46,.16)}
+  .tres-gar{grid-template-columns:1fr}
+  .gar-mini{border-right:1px solid rgba(181,154,98,.5)}
+  .gar-mini + .gar-mini{border-top:none}
+  .fase{grid-template-columns:1fr;gap:14px}
 }
 @media(max-width:860px){
-  .calc,.columnas,.piezas{grid-template-columns:1fr}
+  .calc,.piezas,.modulo,.flujo,.bonus-lista{grid-template-columns:1fr}
+  .bonus-caja + .bonus-caja{border-left:1px solid rgba(11,59,46,.16);border-top:none}
+  .comparativa .cab,.comparativa .fila{grid-template-columns:1fr 34px 1fr}
+  .comparativa .antes,.comparativa .despues{font-size:.86rem;padding:14px 16px}
   .calc-inputs{border-right:none;border-bottom:1px solid rgba(11,59,46,.12)}
-  .col:first-child{border-right:none;border-bottom:1px solid rgba(245,242,234,.18)}
   .pieza{border-right:none}
   .pieza:nth-child(3),.pieza:nth-child(4){background:var(--blanco)}
   .pieza:nth-child(2n){background:rgba(11,59,46,.04)}
@@ -351,10 +459,40 @@ footer .marca{
   </div>
 </section>
 
-<!-- ============ 02 · DE QUÉ TRATA ============ -->
+<!-- ============ 02 · LA SITUACIÓN ACTUAL ============ -->
 <section class="claro">
   <div class="wrap">
-    <div class="kicker rv">01 — De qué trata exactamente</div>
+    <div class="kicker rv">01 — La situación actual</div>
+    <h2 class="rv d1">Hoy solo hay una forma de saber cómo va un asunto.</h2>
+    <p class="lead rv d2">Preguntarte.</p>
+
+    <div class="citas rv d2">
+      <div class="cita">«¿Hay alguna novedad?»</div>
+      <div class="cita">«¿Cómo va lo mío?»</div>
+      <div class="cita">«¿Ha contestado la otra parte?»</div>
+      <div class="cita">«¿Tengo que hacer algo?»</div>
+    </div>
+
+    <div class="cadena rv d3">
+      <span class="eslabon">Identificar al cliente</span><span class="sep">→</span>
+      <span class="eslabon">Identificar el expediente</span><span class="sep">→</span>
+      <span class="eslabon">Recuperar el contexto</span><span class="sep">→</span>
+      <span class="eslabon">Consultar el sistema</span><span class="sep">→</span>
+      <span class="eslabon">Responder</span><span class="sep">→</span>
+      <span class="eslabon">Volver a lo que estabas haciendo</span>
+    </div>
+
+    <div class="remate rv">
+      <p class="grande">Ningún paso necesita criterio jurídico. Todos necesitan a un abogado.</p>
+      <p>Esa es exactamente la parte del trabajo que el sistema se lleva: la que te ocupa sin pedirte lo único que solo tú puedes aportar.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 03 · LA SOLUCIÓN ============ -->
+<section class="claro-alt">
+  <div class="wrap">
+    <div class="kicker rv">02 — La solución</div>
     <h2 class="rv d1">No contratas una IA. Contratas dejar de ser el punto por el que pasa todo.</h2>
     <p class="lead rv d2">Un cliente escribe: «¿hay alguna novedad?». La pregunta dura cinco segundos; la respuesta te cuesta abrir el expediente, recordar en qué punto está, contestar y volver a lo que estabas haciendo. Diez o veinte veces por semana, eso ya no es atención al cliente: es una fuga de concentración.</p>
     <p class="lead rv d2"><strong>El sistema</strong> se ocupa de esas consultas rutinarias —las que solo requieren información que ya existe— y te deja a ti las que requieren criterio jurídico.</p>
@@ -394,40 +532,94 @@ footer .marca{
   </div>
 </section>
 
-<!-- ============ 03 · CÓMO CAMBIA LA SEMANA ============ -->
+<!-- ============ 04 · PIEZA 01 ============ -->
 <section class="oscuro">
   <div class="wrap">
-    <div class="kicker rv">02 — Cómo cambia tu semana</div>
-    <h2 class="rv d1">La misma consulta, antes y después.</h2>
-    <p class="lead rv d2">No cambia lo que el cliente pregunta. Cambia quién lo atiende y cuándo te enteras tú.</p>
+    <div class="kicker rv">03 — Pieza 01</div>
+    <h2 class="rv d1">El portal del cliente.</h2>
+    <p class="lead rv d2">Un espacio propio donde el cliente ve su asunto sin tener que escribir a nadie.</p>
 
-    <div class="columnas rv">
-      <div class="col">
-        <div class="col-sub">Cómo funciona hoy</div>
+    <ul class="lista rv d2">
+      <li><strong>En qué fase está su asunto</strong>, explicado en un lenguaje que entiende sin ser abogado.</li>
+      <li><strong>El último trámite y la próxima fecha relevante</strong>, en cuanto se producen.</li>
+      <li><strong>La documentación que falta por aportar</strong>, si la hay, y qué se espera de él.</li>
+      <li><strong>Disponible a cualquier hora</strong>, sin que nadie del despacho tenga que estar delante.</li>
+    </ul>
+
+    <p class="nota rv" style="margin-top:28px">La información sale de tu CRM o de tu gestor de expedientes. Nadie copia nada a mano y el expediente no se mueve de donde está.</p>
+  </div>
+</section>
+
+<!-- ============ 05 · PIEZA 02 ============ -->
+<section class="claro">
+  <div class="wrap">
+    <div class="kicker rv">04 — Pieza 02</div>
+    <h2 class="rv d1">El agente por WhatsApp.</h2>
+    <p class="lead rv d2">En el canal por el que tus clientes ya te escriben hoy.</p>
+
+    <div class="modulo rv d2">
+      <div>
+        <h3>Responde lo rutinario. Deriva lo jurídico.</h3>
         <ul>
-          <li>El cliente pregunta. Interrumpes lo que estás haciendo.</li>
-          <li>Identificas el expediente, recuperas el contexto, abres el gestor.</li>
-          <li>Contestas y vuelves a tu tarea. Diez o veinte veces por semana.</li>
-          <li>Si hay novedad, o avisas tú uno a uno o el cliente se entera preguntando.</li>
+          <li>Contesta con la información que ya existe: estado, último trámite, próxima fecha.</li>
+          <li>Cuando la consulta pide criterio, se detiene y la pasa al abogado responsable.</li>
+          <li>No aproxima ni da consejo jurídico. Es una regla de diseño, no una preferencia.</li>
+          <li>Puedes leer todo lo que ha contestado desde el primer día.</li>
         </ul>
       </div>
-      <div class="col">
-        <div class="col-sub">Cómo funciona después</div>
-        <ul>
-          <li>El cliente pregunta. El sistema responde en el momento.</li>
-          <li>La información sale de donde ya está: tu CRM o tu gestor de expedientes.</li>
-          <li>Solo te llega lo que requiere tu criterio. El resto se resuelve sin ti.</li>
-          <li>Cuando hay novedad, el aviso sale solo. El cliente deja de preguntar.</li>
-        </ul>
+      <div class="chat">
+        <div class="dia">Hoy</div>
+        <div class="burbuja de-el">Buenas tardes, ¿hay novedades en mi asunto?</div>
+        <div class="burbuja nuestra">El juzgado ha acordado la apertura de juicio oral. Ya está publicado en tu portal.</div>
+        <div class="burbuja de-el">¿Y me conviene aceptar la conformidad?</div>
+        <div class="burbuja nuestra">Eso lo valora tu abogado. Le paso tu consulta ahora mismo.</div>
+        <div class="aviso-chat">Derivado al abogado responsable</div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ============ 04 · CALCULADORA ============ -->
+<!-- ============ 06 · PIEZA 03 ============ -->
+<section class="oscuro">
+  <div class="wrap">
+    <div class="kicker rv">05 — Pieza 03</div>
+    <h2 class="rv d1">El cliente se entera antes de preguntar.</h2>
+    <p class="lead rv d2">Las actualizaciones proactivas invierten el orden: la novedad sale hacia el cliente en lugar de esperar a que él venga a buscarla.</p>
+
+    <div class="flujo rv d2">
+      <div class="nodo">
+        <span class="idx">01</span>
+        <h3>Novedad</h3>
+        <p>Algo cambia en el expediente y el sistema lo detecta.</p>
+      </div>
+      <div class="nodo">
+        <span class="idx">02</span>
+        <h3>Borrador</h3>
+        <p>Se redacta el aviso en lenguaje comprensible para el cliente.</p>
+      </div>
+      <div class="nodo">
+        <span class="idx">03</span>
+        <h3>Tu visto bueno</h3>
+        <p>Lo revisas y lo apruebas. Nada sale sin pasar por aquí.</p>
+      </div>
+      <div class="nodo">
+        <span class="idx">04</span>
+        <h3>Cliente informado</h3>
+        <p>Recibe el aviso y lo ve publicado en su portal.</p>
+      </div>
+    </div>
+
+    <div class="remate rv">
+      <p class="grande">Nada sale sin que tú lo publiques.</p>
+      <p>El sistema prepara y avisa; la decisión de qué se cuenta y cuándo sigue siendo del despacho.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 07 · CALCULADORA ============ -->
 <section id="calculadora" class="claro">
   <div class="wrap">
-    <div class="kicker rv">03 — Cuánto te cuesta hoy</div>
+    <div class="kicker rv">06 — Cuánto te cuesta hoy</div>
     <h2 class="rv d1">Calcula tus números.</h2>
     <p class="lead rv d2" style="max-width:58ch">Tres datos y ya está. No se envía nada a ningún sitio: el cálculo ocurre entero dentro de tu navegador.</p>
 
@@ -475,105 +667,144 @@ footer .marca{
   </div>
 </section>
 
-<!-- ============ 05 · PRECIO ============ -->
-<section id="precio" class="claro-alt">
+<!-- ============ 08 · LA TRANSFORMACIÓN ============ -->
+<section class="oscuro">
   <div class="wrap">
-    <div class="kicker rv">04 — Los tres niveles y su precio</div>
-    <h2 class="rv d1">Tres formas de accionar.</h2>
-    <p class="lead rv d2">Mismo sistema, distinta profundidad. Se puede empezar por el primer nivel y subir después: lo implantado no se tira.</p>
+    <div class="kicker rv">07 — La transformación</div>
+    <h2 class="rv d1">Dónde vas a estar.</h2>
+    <p class="lead rv d2">No cambia lo que el cliente pregunta. Cambia quién lo atiende y cuándo te enteras tú.</p>
 
-    <div class="planes rv">
-      <div class="plan">
-        <div class="plan-nivel">Nivel 1</div>
-        <div class="plan-nombre">Básico</div>
-        <div class="plan-precio">1.200 €</div>
-        <div class="plan-precio-et">Implantación, pago único</div>
-        <div class="plan-mes">
-          <div class="plan-precio">150 €</div>
-          <div class="plan-precio-et">Al mes</div>
-        </div>
-        <ul>
-          <li>Agente por WhatsApp</li>
-          <li>Escalado al abogado</li>
-          <li class="off">Portal del cliente</li>
-          <li class="off">Adaptación al despacho</li>
-          <li class="off">Actualizaciones proactivas</li>
-          <li class="off">Pre-cualificación de nuevos clientes</li>
-          <li>Implantación llave en mano</li>
-          <li>Sesión de puesta en marcha</li>
-          <li>Mantenimiento, soporte y mejoras</li>
-          <li>Garantía de 7 horas</li>
-        </ul>
+    <div class="comparativa rv d2">
+      <div class="cab"><div>Hoy</div><div></div><div>Con el sistema</div></div>
+      <div class="fila">
+        <div class="antes">El cliente pregunta y alguien se detiene</div>
+        <div class="flecha">→</div>
+        <div class="despues">Entra y lo ve, <b>a cualquier hora</b></div>
       </div>
-
-      <div class="plan destacado">
-        <span class="plan-tag">Recomendado</span>
-        <div class="plan-nivel">Nivel 2</div>
-        <div class="plan-nombre">Hecho a Medida</div>
-        <div class="plan-precio">2.200 €</div>
-        <div class="plan-precio-et">Implantación, pago único</div>
-        <div class="plan-mes">
-          <div class="plan-precio">250 €</div>
-          <div class="plan-precio-et">Al mes</div>
-        </div>
-        <ul>
-          <li>Agente por WhatsApp</li>
-          <li>Escalado al abogado</li>
-          <li>Portal del cliente</li>
-          <li>Adaptación al despacho</li>
-          <li>Actualizaciones proactivas</li>
-          <li class="off">Pre-cualificación de nuevos clientes</li>
-          <li>Implantación llave en mano</li>
-          <li>Sesión de puesta en marcha</li>
-          <li>Mantenimiento, soporte y mejoras</li>
-          <li>Garantía de 7 horas</li>
-        </ul>
+      <div class="fila">
+        <div class="antes">Hay que recuperar el contexto</div>
+        <div class="flecha">→</div>
+        <div class="despues">Ya está publicado y explicado</div>
       </div>
-
-      <div class="plan">
-        <div class="plan-nivel">Nivel 3</div>
-        <div class="plan-nombre">Sistema Completo</div>
-        <div class="plan-precio">3.200 €</div>
-        <div class="plan-precio-et">Implantación, pago único</div>
-        <div class="plan-mes">
-          <div class="plan-precio">350 €</div>
-          <div class="plan-precio-et">Al mes</div>
-        </div>
-        <ul>
-          <li>Agente por WhatsApp</li>
-          <li>Escalado al abogado</li>
-          <li>Portal del cliente</li>
-          <li>Adaptación al despacho</li>
-          <li>Actualizaciones proactivas</li>
-          <li>Pre-cualificación de nuevos clientes</li>
-          <li>Implantación llave en mano</li>
-          <li>Sesión de puesta en marcha</li>
-          <li>Mantenimiento, soporte y mejoras</li>
-          <li>Garantía de 7 horas</li>
-        </ul>
+      <div class="fila">
+        <div class="antes">Se entera cuando pregunta</div>
+        <div class="flecha">→</div>
+        <div class="despues">Se entera <b>cuando ocurre</b></div>
+      </div>
+      <div class="fila">
+        <div class="antes">El silencio parece abandono</div>
+        <div class="flecha">→</div>
+        <div class="despues">Sabe en qué fase está</div>
+      </div>
+      <div class="fila">
+        <div class="antes">Todas las consultas llegan al abogado</div>
+        <div class="flecha">→</div>
+        <div class="despues">Solo las que piden <b>criterio jurídico</b></div>
       </div>
     </div>
-
-    <div class="ancla rv">
-      <h3>Por qué recomendamos el nivel 2</h3>
-      <p>Es el primero que cierra el círculo completo: el portal evita la consulta, las actualizaciones proactivas la adelantan y la adaptación hace que el sistema hable como habla tu despacho. Esa adaptación —qué le cuentas a un cliente y qué no, cuándo una consulta deja de ser rutina— es la diferencia entre un sistema que usas y uno que apagas al mes.</p>
-    </div>
-
   </div>
 </section>
 
-<!-- ============ 06 · RIESGO ============ -->
+<!-- ============ 09 · METODOLOGÍA ============ -->
+<section class="claro">
+  <div class="wrap">
+    <div class="kicker rv">08 — Metodología</div>
+    <h2 class="rv d1">Un mes. El trabajo lo hacemos nosotros.</h2>
+    <p class="lead rv d2">Tú aportas accesos, información y las reglas de qué se puede contar y qué no. El trabajo técnico no es tuyo.</p>
+
+    <div class="fases rv d2">
+      <div class="fase">
+        <div class="et">Semana 1<small>Inmersión</small></div>
+        <div>
+          <h3>Entender cómo trabaja el despacho</h3>
+          <p>Qué consultas llegan de verdad y qué información puede salir al portal.</p>
+          <div class="chips"><span>Sesión de inmersión</span><span>Mapa de información publicable</span><span>Acuerdo de datos</span></div>
+        </div>
+      </div>
+      <div class="fase">
+        <div class="et">Semanas 2 y 3<small>Construcción</small></div>
+        <div>
+          <h3>Montaje y carga de tus expedientes</h3>
+          <p>Portal en tu dominio y agente conectado a WhatsApp Business.</p>
+          <div class="chips"><span>Portal a medida</span><span>WhatsApp Business</span><span>Validación previa</span></div>
+        </div>
+      </div>
+      <div class="fase">
+        <div class="et">Semana 4<small>Puesta en marcha</small></div>
+        <div>
+          <h3>Apertura por tandas y formación</h3>
+          <p>Empezamos por un grupo, ajustamos con uso real y abrimos al resto.</p>
+          <div class="chips"><span>Apertura escalonada</span><span>Formación del equipo</span><span>Ajuste con uso real</span></div>
+        </div>
+      </div>
+    </div>
+
+    <p class="nota rv" style="margin-top:26px">El plazo cuenta desde que disponemos de accesos e información.</p>
+  </div>
+</section>
+
+<!-- ============ 10 · BONUS ============ -->
+<section class="claro-alt">
+  <div class="wrap">
+    <div class="kicker rv">09 — Bonus</div>
+    <span class="pill-mini rv d1">Sin coste adicional</span>
+    <h2 class="rv d1">Dos bonus incluidos.</h2>
+    <p class="lead rv d2">Te sirven aunque no existiera el sistema.</p>
+
+    <div class="bonus-lista rv d2">
+      <article class="bonus-caja">
+        <span class="sello">Bonus 01</span>
+        <h3>Formación IA para Despachos</h3>
+        <p>Sacarle partido a la IA en tu despacho, no solo en nuestro sistema.</p>
+        <div class="chips">
+          <span>Qué delegar y qué no</span>
+          <span>Prompts útiles</span>
+          <span>Revisar las respuestas</span>
+          <span>Ejemplos jurídicos</span>
+          <span>Sesión práctica con el equipo</span>
+        </div>
+      </article>
+      <article class="bonus-caja">
+        <span class="sello">Bonus 02</span>
+        <h3>Auditoría de Automatización</h3>
+        <p>Miramos cómo trabaja el despacho y decimos qué automatizar primero.</p>
+        <div class="chips">
+          <span>Tareas repetitivas</span>
+          <span>Consultas que se repiten</span>
+          <span>Qué no conviene automatizar</span>
+          <span>Prioridad por impacto</span>
+        </div>
+        <p class="entregable"><strong>Entregable</strong> Mapa de Automatización: proceso, tiempo y prioridad.</p>
+      </article>
+    </div>
+
+    <p class="nota rv" style="margin-top:26px">Reservados a los dos primeros despachos de cada mes.</p>
+  </div>
+</section>
+
+<!-- ============ 11 · RIESGO ============ -->
 <section class="oscuro">
   <div class="wrap">
-    <div class="kicker rv">05 — Dónde está el riesgo</div>
+    <div class="kicker rv">10 — Dónde está el riesgo</div>
     <h2 class="rv d1">Contratar esto no debería darte miedo. Por eso el riesgo lo asumimos nosotros.</h2>
     <p class="lead rv d2">Un despacho no puede permitirse un experimento a medio instalar. Estas son las condiciones en las que entramos.</p>
 
-    <div class="garantia rv">
-      <div class="tit">Garantía de 7 horas</div>
-      <div class="frase">«Si al tercer mes de funcionamiento el sistema no te ha liberado al menos 7 horas a la semana, no pagas: devolvemos la implantación y cancelamos la mensualidad.»</div>
-      <p class="nota">Se mide sobre el registro del propio sistema —consultas resueltas sin tu intervención, avisos enviados y casos filtrados antes de llegar a tu mesa— con el tiempo medio por consulta que acordemos contigo antes de empezar. La línea de partida la fijamos juntos la primera semana, para que el resultado no dependa de la opinión de nadie.</p>
+    <div class="tres-gar rv">
+      <div class="gar-mini">
+        <h4>7 horas a la semana</h4>
+        <p>Si al tercer mes de funcionamiento el sistema no te ha liberado al menos 7 horas semanales, devolvemos la implantación y cancelamos la mensualidad.</p>
+      </div>
+      <div class="gar-mini">
+        <h4>Entrega por escrito</h4>
+        <p>La fecha de puesta en marcha va en el contrato. Si nos retrasamos por causas nuestras, descontamos un mes de cuota por cada semana de retraso.</p>
+      </div>
+      <div class="gar-mini">
+        <h4>3 meses de ajustes</h4>
+        <p>Durante los tres primeros meses de uso real, cualquier ajuste o cambio de funcionamiento entra sin coste adicional.</p>
+      </div>
     </div>
+
+    <p class="nota rv" style="margin-top:26px">Las horas se miden sobre el registro del propio sistema —consultas resueltas sin tu intervención, avisos enviados y casos filtrados antes de llegar a tu mesa— con el tiempo medio por consulta que acordemos contigo antes de empezar. La línea de partida la fijamos juntos la primera semana, para que el resultado no dependa de la opinión de nadie.</p>
 
     <ul class="lista rv">
       <li><strong>La implantación la hacemos nosotros.</strong> Operativo en tres semanas. Tú aportas accesos, información y las reglas de qué se puede contar y qué no; el trabajo técnico no es tuyo.</li>
