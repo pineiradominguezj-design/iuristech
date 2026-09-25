@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Oferta General — IURIS.TECH</title>
-<meta name="description" content="Qué hace exactamente el sistema de atención al cliente de IURIS.TECH, cómo se implanta y las tres garantías por escrito. Con una calculadora para medir lo que hoy te cuesta atender, avisar y descartar casos.">
+<meta name="description" content="Qué hace exactamente el sistema de atención al cliente de IURIS.TECH, cómo se implanta y las tres garantías por escrito.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -120,13 +120,12 @@ em{font-style:italic}
 .oscuro .remate .grande{color:var(--blanco)}
 .claro-alt .remate{background:var(--marfil)}
 
-/* ---------- las cinco piezas ---------- */
+/* ---------- las piezas ---------- */
 .piezas{display:grid;grid-template-columns:1fr 1fr;gap:0;margin-top:48px;border:1px solid rgba(11,59,46,.16)}
 .pieza{padding:clamp(24px,2.8vw,34px);border-right:1px solid rgba(11,59,46,.13);border-bottom:1px solid rgba(11,59,46,.13)}
 .pieza:nth-child(2n){border-right:none}
 .pieza:nth-child(1),.pieza:nth-child(2){background:var(--blanco)}
-.pieza:nth-child(3),.pieza:nth-child(4){background:rgba(11,59,46,.04)}
-.pieza:nth-child(5){grid-column:1 / -1;background:var(--blanco);border-right:none;border-bottom:none}
+.pieza:nth-child(3),.pieza:nth-child(4){background:rgba(11,59,46,.04);border-bottom:none}
 .pieza .num{
   font-family:var(--sans);font-weight:500;font-size:.7rem;letter-spacing:.18em;
   color:var(--dorado-osc);display:block;margin-bottom:8px;
@@ -134,61 +133,6 @@ em{font-style:italic}
 .pieza h3{color:var(--verde);margin-bottom:8px;line-height:1.3}
 .pieza p{font-size:.96rem;line-height:1.55;color:var(--gris);max-width:none;margin:0}
 .pieza .solo{font-family:var(--sans);font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--dorado-osc)}
-
-/* ---------- antes / después ---------- */
-/* ---------- calculadora ---------- */
-.calc{
-  margin-top:48px;background:var(--blanco);border:1px solid rgba(11,59,46,.16);
-  display:grid;grid-template-columns:1.08fr 1fr;
-}
-.calc-inputs{
-  padding:clamp(26px,3.2vw,40px);border-right:1px solid rgba(11,59,46,.12);
-  display:flex;flex-direction:column;justify-content:center;
-  gap:clamp(26px,3.4vw,40px);
-}
-.campo label{
-  display:flex;justify-content:space-between;align-items:baseline;gap:16px;
-  font-family:var(--sans);font-weight:500;font-size:.85rem;color:var(--gris);
-  margin-bottom:12px;line-height:1.35;
-}
-.campo label .val{
-  font-family:var(--sans);font-weight:700;font-size:1.1rem;color:var(--verde);
-  white-space:nowrap;letter-spacing:-.01em;
-}
-input[type=range]{
-  -webkit-appearance:none;appearance:none;width:100%;height:2px;
-  background:rgba(11,59,46,.22);outline:none;cursor:pointer;display:block;
-}
-input[type=range]::-webkit-slider-thumb{
-  -webkit-appearance:none;appearance:none;width:19px;height:19px;border-radius:50%;
-  background:var(--verde);cursor:pointer;border:3px solid var(--blanco);
-  box-shadow:0 0 0 1px rgba(11,59,46,.35);
-}
-input[type=range]::-moz-range-thumb{
-  width:14px;height:14px;border-radius:50%;background:var(--verde);
-  cursor:pointer;border:3px solid var(--blanco);box-shadow:0 0 0 1px rgba(11,59,46,.35);
-}
-input[type=range]:focus-visible{outline:2px solid var(--dorado-osc);outline-offset:6px}
-.calc-out{
-  padding:clamp(26px,3.2vw,40px);background:var(--verde-prof);color:var(--marfil);
-  display:flex;flex-direction:column;justify-content:center;
-}
-.out-label{
-  font-family:var(--sans);font-weight:500;font-size:.74rem;letter-spacing:.2em;
-  text-transform:uppercase;color:rgba(245,242,234,.5);margin-bottom:10px;
-}
-.out-principal{
-  font-family:var(--sans);font-weight:800;font-size:clamp(3rem,6.4vw,4.4rem);
-  line-height:.95;letter-spacing:-.04em;color:var(--blanco);
-}
-.out-principal .u{font-size:.3em;font-weight:600;letter-spacing:0;margin-left:.2em;opacity:.65}
-.out-secundarios{
-  margin-top:32px;padding-top:24px;border-top:1px solid rgba(245,242,234,.16);
-  display:flex;flex-direction:column;gap:15px;
-}
-.out-linea{display:flex;justify-content:space-between;align-items:baseline;gap:18px}
-.out-linea .k{font-family:var(--sans);font-size:.82rem;color:rgba(245,242,234,.6);line-height:1.3}
-.out-linea .v{font-family:var(--sans);font-weight:700;font-size:1.2rem;color:var(--blanco);white-space:nowrap}
 
 /* ---------- situación actual ---------- */
 .citas{display:flex;flex-wrap:wrap;gap:12px;margin-top:40px}
@@ -206,8 +150,8 @@ input[type=range]:focus-visible{outline:2px solid var(--dorado-osc);outline-offs
 .claro .eslabon,.claro-alt .eslabon{border-color:rgba(11,59,46,.2);color:var(--verde)}
 .cadena .sep{font-family:var(--sans);color:var(--dorado);font-size:.9rem}
 
-/* ---------- flujo de 4 pasos ---------- */
-.flujo{display:grid;grid-template-columns:repeat(4,1fr);gap:0;margin-top:48px}
+/* ---------- flujo de 3 pasos ---------- */
+.flujo{display:grid;grid-template-columns:repeat(3,1fr);gap:0;margin-top:48px}
 .nodo{
   padding:clamp(22px,2.6vw,30px);border:1px solid rgba(245,242,234,.18);
   border-right:none;background:rgba(245,242,234,.04);
@@ -282,41 +226,6 @@ input[type=range]:focus-visible{outline:2px solid var(--dorado-osc);outline-offs
 }
 .oscuro .chips span{border-color:rgba(245,242,234,.24);color:rgba(245,242,234,.8)}
 
-/* ---------- bonus ---------- */
-.pill-mini{
-  display:inline-block;font-family:var(--sans);font-weight:600;font-size:.66rem;
-  letter-spacing:.16em;text-transform:uppercase;background:var(--dorado);
-  color:var(--verde-prof);padding:5px 12px;margin-bottom:18px;
-}
-.bonus-lista{display:grid;grid-template-columns:1fr 1fr;gap:0;margin-top:48px}
-.bonus-caja{
-  background:var(--blanco);border:1px solid rgba(11,59,46,.16);
-  padding:clamp(26px,3vw,36px);
-}
-.bonus-caja + .bonus-caja{border-left:none}
-.oscuro .bonus-caja{background:rgba(245,242,234,.05);border-color:rgba(245,242,234,.2)}
-.bonus-caja .sello{
-  display:block;font-family:var(--sans);font-weight:700;font-size:.68rem;letter-spacing:.2em;
-  text-transform:uppercase;color:var(--dorado-osc);margin-bottom:13px;
-}
-.oscuro .bonus-caja .sello{color:var(--dorado)}
-.bonus-caja h3{
-  font-family:var(--sans);font-weight:600;font-size:clamp(1.08rem,1.9vw,1.28rem);
-  color:var(--verde);line-height:1.28;margin-bottom:11px;letter-spacing:-.01em;
-}
-.oscuro .bonus-caja h3{color:var(--blanco)}
-.bonus-caja p{font-size:.98rem;line-height:1.55;color:var(--gris)}
-.oscuro .bonus-caja p{color:rgba(245,242,234,.85)}
-.bonus-caja .entregable{
-  margin-top:16px;padding-top:14px;border-top:1px solid rgba(11,59,46,.14);font-size:.9rem;
-}
-.oscuro .bonus-caja .entregable{border-top-color:rgba(245,242,234,.18)}
-.bonus-caja .entregable strong{
-  display:block;font-family:var(--sans);font-weight:600;font-size:.68rem;letter-spacing:.16em;
-  text-transform:uppercase;color:var(--verde);margin-bottom:5px;
-}
-.oscuro .bonus-caja .entregable strong{color:var(--dorado)}
-
 /* ---------- garantías (trío) ---------- */
 .tres-gar{display:grid;grid-template-columns:repeat(3,1fr);gap:0;margin-top:48px}
 .gar-mini{
@@ -367,9 +276,7 @@ footer .marca{
 
 /* ---------- responsive ---------- */
 @media(max-width:940px){
-  .flujo{grid-template-columns:1fr 1fr}
   .nodo{border-right:1px solid rgba(245,242,234,.18)}
-  .nodo:nth-child(-n+2){border-bottom:none}
   .claro .nodo,.claro-alt .nodo{border-right-color:rgba(11,59,46,.16)}
   .tres-gar{grid-template-columns:1fr}
   .gar-mini{border-right:1px solid rgba(181,154,98,.5)}
@@ -377,11 +284,9 @@ footer .marca{
   .fase{grid-template-columns:1fr;gap:14px}
 }
 @media(max-width:860px){
-  .calc,.piezas,.flujo,.bonus-lista{grid-template-columns:1fr}
-  .bonus-caja + .bonus-caja{border-left:1px solid rgba(11,59,46,.16);border-top:none}
+  .piezas,.flujo{grid-template-columns:1fr}
   .comparativa .cab,.comparativa .fila{grid-template-columns:1fr 34px 1fr}
   .comparativa .antes,.comparativa .despues{font-size:.86rem;padding:14px 16px}
-  .calc-inputs{border-right:none;border-bottom:1px solid rgba(11,59,46,.12)}
   .pieza{border-right:none}
   .pieza:nth-child(3),.pieza:nth-child(4){background:var(--blanco)}
   .pieza:nth-child(2n){background:rgba(11,59,46,.04)}
@@ -479,11 +384,6 @@ footer .marca{
         <h3>Actualizaciones proactivas</h3>
         <p>Cuando hay una novedad en el caso de un cliente, es el sistema quien le avisa de manera automática.</p>
       </div>
-      <div class="pieza">
-        <span class="num">05 · <span class="solo">Solo en Sistema Completo</span></span>
-        <h3>Pre-cualificación de nuevos clientes</h3>
-        <p>Antes de que un caso llegue a tu mesa, el sistema recoge lo que necesitas para decidir si te interesa: qué ha pasado, cuándo, con qué documentación y qué espera el cliente. Dejas de dedicar primeras consultas a estudiar asuntos con los que después no vas a trabajar.</p>
-      </div>
     </div>
 
     <div class="remate rv">
@@ -542,16 +442,11 @@ footer .marca{
       </div>
       <div class="nodo">
         <span class="idx">02</span>
-        <h3>Borrador</h3>
-        <p>Se redacta el aviso en lenguaje comprensible para el cliente.</p>
+        <h3>Email automático</h3>
+        <p>El sistema redacta y envía el aviso en lenguaje comprensible para el cliente, sin que nadie tenga que intervenir.</p>
       </div>
       <div class="nodo">
         <span class="idx">03</span>
-        <h3>Tu visto bueno</h3>
-        <p>Lo revisas y lo apruebas. Nada sale sin pasar por aquí.</p>
-      </div>
-      <div class="nodo">
-        <span class="idx">04</span>
         <h3>Cliente informado</h3>
         <p>Recibe el aviso y lo ve publicado en su portal.</p>
       </div>
@@ -559,60 +454,10 @@ footer .marca{
   </div>
 </section>
 
-<!-- ============ 07 · CALCULADORA ============ -->
-<section id="calculadora" class="claro">
+<!-- ============ 07 · LA TRANSFORMACIÓN ============ -->
+<section class="claro">
   <div class="wrap">
-    <div class="kicker rv">06 — Cuánto te cuesta hoy</div>
-    <h2 class="rv d1">Calcula tus números.</h2>
-
-    <div class="calc rv d2">
-      <div class="calc-inputs">
-        <div class="campo">
-          <label for="c1">Consultas de estado que recibe el despacho cada semana <span class="val" id="v1">15</span></label>
-          <input type="range" id="c1" min="1" max="60" step="1" value="15">
-        </div>
-        <div class="campo">
-          <label for="c2">Minutos que te lleva cada una, de principio a fin <span class="val" id="v2">6 min</span></label>
-          <input type="range" id="c2" min="1" max="30" step="1" value="6">
-        </div>
-        <div class="campo">
-          <label for="c3">Lo que vale una hora de tu tiempo <span class="val" id="v3">150 €</span></label>
-          <input type="range" id="c3" min="50" max="400" step="10" value="150">
-        </div>
-      </div>
-
-      <div class="calc-out">
-        <div class="out-label">Al mes</div>
-        <div class="out-principal"><span id="oMes">6</span><span class="u">horas</span></div>
-        <div class="out-secundarios">
-          <div class="out-linea">
-            <div class="k">Al año</div>
-            <div class="v"><span id="oAnio">72</span> h</div>
-          </div>
-          <div class="out-linea">
-            <div class="k">Equivale a</div>
-            <div class="v"><span id="oJorn">9</span> jornadas</div>
-          </div>
-          <div class="out-linea">
-            <div class="k">Valor de ese tiempo al año</div>
-            <div class="v"><span id="oEuro">10.800</span> €</div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-
-    <div class="remate rv">
-      <p class="grande">Estas horas ya las estás pagando. Lo que no hay es una factura que te las recuerde.</p>
-      <p>Y esto solo cuenta las consultas de estado. No incluye las primeras consultas dedicadas a casos que después no aceptas, ni los avisos de novedad que hoy das tú, uno a uno.</p>
-    </div>
-  </div>
-</section>
-
-<!-- ============ 08 · LA TRANSFORMACIÓN ============ -->
-<section class="oscuro">
-  <div class="wrap">
-    <div class="kicker rv">07 — La transformación</div>
+    <div class="kicker rv">06 — La transformación</div>
     <h2 class="rv d1">Dónde vas a estar.</h2>
     <p class="lead rv d2">No cambia lo que el cliente pregunta. Cambia quién lo atiende y cuándo te enteras tú.</p>
 
@@ -647,10 +492,10 @@ footer .marca{
   </div>
 </section>
 
-<!-- ============ 09 · METODOLOGÍA ============ -->
-<section class="claro">
+<!-- ============ 08 · METODOLOGÍA ============ -->
+<section class="claro-alt">
   <div class="wrap">
-    <div class="kicker rv">08 — Metodología</div>
+    <div class="kicker rv">07 — Metodología</div>
     <h2 class="rv d1">Un mes. El trabajo lo hacemos nosotros.</h2>
     <p class="lead rv d2">Tú aportas accesos, información y las reglas de qué se puede contar y qué no. El trabajo técnico no es tuyo.</p>
 
@@ -685,49 +530,10 @@ footer .marca{
   </div>
 </section>
 
-<!-- ============ 10 · BONUS ============ -->
-<section class="claro-alt">
-  <div class="wrap">
-    <div class="kicker rv">09 — Bonus</div>
-    <span class="pill-mini rv d1">Sin coste adicional</span>
-    <h2 class="rv d1">Dos bonus incluidos.</h2>
-    <p class="lead rv d2">Te sirven aunque no existiera el sistema.</p>
-
-    <div class="bonus-lista rv d2">
-      <article class="bonus-caja">
-        <span class="sello">Bonus 01</span>
-        <h3>Formación IA para Despachos</h3>
-        <p>Sacarle partido a la IA en tu despacho, no solo en nuestro sistema.</p>
-        <div class="chips">
-          <span>Qué delegar y qué no</span>
-          <span>Prompts útiles</span>
-          <span>Revisar las respuestas</span>
-          <span>Ejemplos jurídicos</span>
-          <span>Sesión práctica con el equipo</span>
-        </div>
-      </article>
-      <article class="bonus-caja">
-        <span class="sello">Bonus 02</span>
-        <h3>Auditoría de Automatización</h3>
-        <p>Miramos cómo trabaja el despacho y decimos qué automatizar primero.</p>
-        <div class="chips">
-          <span>Tareas repetitivas</span>
-          <span>Consultas que se repiten</span>
-          <span>Qué no conviene automatizar</span>
-          <span>Prioridad por impacto</span>
-        </div>
-        <p class="entregable"><strong>Entregable</strong> Mapa de Automatización: proceso, tiempo y prioridad.</p>
-      </article>
-    </div>
-
-    <p class="nota rv" style="margin-top:26px">Reservados a los dos primeros despachos de cada mes.</p>
-  </div>
-</section>
-
-<!-- ============ 11 · RIESGO ============ -->
+<!-- ============ 09 · RIESGO ============ -->
 <section class="oscuro">
   <div class="wrap">
-    <div class="kicker rv">10 — Dónde está el riesgo</div>
+    <div class="kicker rv">08 — Dónde está el riesgo</div>
     <h2 class="rv d1">Contratar esto no debería darte miedo. Por eso el riesgo lo asumimos nosotros.</h2>
     <p class="lead rv d2">Un despacho no puede permitirse un experimento a medio instalar. Estas son las condiciones en las que entramos.</p>
 
@@ -788,44 +594,6 @@ footer .marca{
     var h = document.documentElement.scrollHeight - window.innerHeight;
     barra.style.width = (h > 0 ? (window.scrollY / h) * 100 : 0) + '%';
   }, {passive:true});
-
-  // ---- calculadora ----
-  var SEMANAS = 48, JORNADA = 8;
-  var ids = ['c1','c2','c3'];
-  var s = {}, v = {};
-  ids.forEach(function(id, i){
-    s[id] = document.getElementById(id);
-    v[id] = document.getElementById('v' + (i + 1));
-  });
-  if (!s.c1) return;
-  var oMes = document.getElementById('oMes'), oAnio = document.getElementById('oAnio'),
-      oJorn = document.getElementById('oJorn'), oEuro = document.getElementById('oEuro');
-
-  function num(n, dec){
-    dec = dec || 0;
-    if (Math.abs(n - Math.round(n)) < 0.05) dec = 0;
-    return n.toLocaleString('es-ES', {minimumFractionDigits:dec, maximumFractionDigits:dec});
-  }
-
-  function calcular(){
-    var consultas = +s.c1.value, minutos = +s.c2.value, tarifa = +s.c3.value;
-
-    var hAnio = (consultas * minutos * SEMANAS) / 60;
-    var hMes  = hAnio / 12;
-    var jorn  = hAnio / JORNADA;
-
-    v.c1.textContent = consultas;
-    v.c2.textContent = minutos + ' min';
-    v.c3.textContent = num(tarifa) + ' €';
-
-    oMes.textContent  = num(hMes, hMes < 10 ? 1 : 0);
-    oAnio.textContent = num(hAnio, 0);
-    oJorn.textContent = num(jorn, jorn < 10 ? 1 : 0);
-    oEuro.textContent = num(hAnio * tarifa, 0);
-  }
-
-  ids.forEach(function(id){ s[id].addEventListener('input', calcular); });
-  calcular();
 })();
 </script>
 </body>
