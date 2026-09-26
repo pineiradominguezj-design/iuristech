@@ -17,6 +17,7 @@
   --marron:#2B1B14;
   --dorado:#B59A62;
   --gris:#39413D;
+  --error:#B3261E;
 
   /* Fondo de sección: marfil rebajado, para que la tarjeta flote sobre él */
   --panel:#EAE6DB;
@@ -324,13 +325,18 @@ a{color:inherit}
 .field{display:flex;flex-direction:column;gap:.4rem}
 .field--full{grid-column:1/-1}
 .field label{font-size:.88rem;font-weight:500;color:var(--marron)}
-.field input,.field textarea{
+.field input,.field textarea,.field select{
   font-family:var(--sans);font-size:1rem;color:var(--verde-profundo);
   background:var(--panel-alt);border:1px solid var(--rule);border-radius:4px;
   padding:.72rem .85rem;width:100%;
 }
 .field textarea{resize:vertical;min-height:7.5rem;line-height:1.55}
-.field input:focus,.field textarea:focus{border-color:var(--verde)}
+.field input:focus,.field textarea:focus,.field select:focus{border-color:var(--verde)}
+.tel{display:grid;grid-template-columns:minmax(0,8.5rem) minmax(0,1fr);gap:.5rem}
+.tel select{padding-right:.5rem}
+.field__error{font-size:.82rem;font-weight:500;color:var(--error)}
+.field--invalid input,.field--invalid select,
+.field--invalid input:focus,.field--invalid select:focus{border-color:var(--error)}
 .check{display:flex;gap:.7rem;align-items:flex-start;margin-top:1.4rem;font-size:.92rem}
 .check input{margin-top:.28rem;accent-color:var(--verde);width:1rem;height:1rem;flex:0 0 auto}
 .form__foot{margin-top:1.6rem;display:flex;gap:1.1rem;align-items:center;flex-wrap:wrap}
@@ -650,9 +656,32 @@ a{color:inherit}
               <label for="email">Email corporativo</label>
               <input id="email" name="email" type="email" autocomplete="email" required>
             </div>
-            <div class="field">
+            <div class="field" id="field-telefono">
               <label for="telefono">Teléfono</label>
-              <input id="telefono" name="telefono" type="tel" autocomplete="tel" required>
+              <div class="tel">
+                <select id="prefijo" name="prefijo" aria-label="Prefijo internacional">
+                  <option value="+34" selected>+34 España</option>
+                  <option value="+351">+351 Portugal</option>
+                  <option value="+33">+33 Francia</option>
+                  <option value="+376">+376 Andorra</option>
+                  <option value="+39">+39 Italia</option>
+                  <option value="+49">+49 Alemania</option>
+                  <option value="+44">+44 R. Unido</option>
+                  <option value="+353">+353 Irlanda</option>
+                  <option value="+31">+31 P. Bajos</option>
+                  <option value="+32">+32 Bélgica</option>
+                  <option value="+41">+41 Suiza</option>
+                  <option value="+212">+212 Marruecos</option>
+                  <option value="+1">+1 EE. UU.</option>
+                  <option value="+52">+52 México</option>
+                  <option value="+54">+54 Argentina</option>
+                  <option value="+57">+57 Colombia</option>
+                  <option value="+56">+56 Chile</option>
+                  <option value="+51">+51 Perú</option>
+                </select>
+                <input id="telefono" name="telefono" type="tel" inputmode="numeric" autocomplete="tel-national" maxlength="9" placeholder="600123456" aria-describedby="telefono-error" required>
+              </div>
+              <p class="field__error" id="telefono-error" role="alert" hidden>Campo inválido</p>
             </div>
             <div class="field">
               <label for="despacho">Nombre del despacho</label>
@@ -803,6 +832,31 @@ document.getElementById('year').textContent = new Date().getFullYear();
     return document.getElementById(id).value.trim();
   }
 
+  var campoTel = document.getElementById('field-telefono');
+  var telefono = document.getElementById('telefono');
+  var prefijo = document.getElementById('prefijo');
+  var errorTel = document.getElementById('telefono-error');
+
+  function telefonoValido() {
+    return /^\+\d{1,4}$/.test(prefijo.value) && /^\d{1,9}$/.test(telefono.value.trim());
+  }
+
+  function marcarTelefono(invalido) {
+    campoTel.classList.toggle('field--invalid', invalido);
+    errorTel.hidden = !invalido;
+    telefono.setAttribute('aria-invalid', invalido ? 'true' : 'false');
+  }
+
+  telefono.addEventListener('input', function () {
+    var limpio = telefono.value.replace(/\D/g, '').slice(0, 9);
+    if (limpio !== telefono.value) telefono.value = limpio;
+    if (!errorTel.hidden) marcarTelefono(!telefonoValido());
+  });
+
+  prefijo.addEventListener('change', function () {
+    if (!errorTel.hidden) marcarTelefono(!telefonoValido());
+  });
+
   form.addEventListener('submit', function (e) {
     e.preventDefault();
     limpiarAviso();
@@ -813,6 +867,13 @@ document.getElementById('year').textContent = new Date().getFullYear();
     }
 
     if (!form.reportValidity()) return;
+
+    if (!telefonoValido()) {
+      marcarTelefono(true);
+      telefono.focus();
+      return;
+    }
+    marcarTelefono(false);
 
     if (!document.getElementById('privacidad').checked) {
       avisar('Para continuar, acepta la política de privacidad.');
@@ -827,7 +888,7 @@ document.getElementById('year').textContent = new Date().getFullYear();
       body: JSON.stringify({
         Nombre_Completo: valor('nombre'),
         Email_Corporativo: valor('email'),
-        Telefono: valor('telefono'),
+        Telefono: prefijo.value + ' ' + valor('telefono'),
         Nombre_Empresa: valor('despacho'),
         Cargo: valor('cargo'),
         Mensaje: valor('caso')
