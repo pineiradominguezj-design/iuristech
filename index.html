@@ -285,6 +285,18 @@ a{color:inherit}
 }
 .paso h3{font-size:clamp(1.2rem,1.1rem + .4vw,1.42rem);margin-bottom:.6rem;line-height:1.25}
 .paso p{max-width:44ch;font-size:1rem}
+.paso .card__meta{margin-bottom:.75rem}
+.paso .card__meta span{opacity:.72}
+.tags{display:flex;flex-wrap:wrap;gap:.45rem;margin-top:1.15rem}
+.tags li{
+  font-size:.8rem;line-height:1;padding:.5rem .8rem;
+  background:var(--panel-alt);border:1px solid var(--rule-soft);
+  border-radius:999px;color:var(--gris);
+}
+.pasos__nota{
+  margin-top:clamp(1.25rem,2.5vw,1.75rem);
+  font-size:.95rem;text-align:center;opacity:.8;
+}
 
 /* ---------- Capacidad ---------- */
 .garantia{background:var(--verde-profundo);color:rgba(245,242,234,.82);padding-block:clamp(3.5rem,7vw,6rem)}
@@ -322,6 +334,11 @@ a{color:inherit}
 .check{display:flex;gap:.7rem;align-items:flex-start;margin-top:1.4rem;font-size:.92rem}
 .check input{margin-top:.28rem;accent-color:var(--verde);width:1rem;height:1rem;flex:0 0 auto}
 .form__foot{margin-top:1.6rem;display:flex;gap:1.1rem;align-items:center;flex-wrap:wrap}
+.form__msg{font-size:.92rem;line-height:1.5;color:var(--marron);flex:1 1 18ch}
+.btn[disabled]{opacity:.55;cursor:progress}
+
+/* Campo trampa: fuera de pantalla, invisible para personas, visible para bots */
+.hp{position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden}
 .done{padding:clamp(1.75rem,3.5vw,2.6rem);margin-top:clamp(2rem,4vw,3rem)}
 .done h3{font-size:1.45rem;font-weight:700;margin-bottom:.8rem}
 .done p{max-width:46ch}
@@ -558,28 +575,48 @@ a{color:inherit}
     <div class="wrap">
       <div class="sec__head">
         <p class="sec__eyebrow">Implantación</p>
-        <h2>Operativo en tres semanas</h2>
+        <h2>Operativo en un mes</h2>
         <p>La implantación la hacemos nosotros. Tú aportas los accesos, la información y las reglas de funcionamiento de tu despacho.</p>
       </div>
 
       <ol class="pasos">
         <li class="card paso">
-          <h3>Semana 01</h3>
-          <p>Revisamos cómo entran hoy las consultas, qué se pregunta con más frecuencia y qué información puede responderse sin tu intervención.</p>
+          <p class="card__meta">Semana 1 · <span>Inmersión</span></p>
+          <h3>Entender cómo trabaja el despacho</h3>
+          <p>Qué consultas llegan de verdad y qué información puede salir al portal.</p>
+          <ul class="tags">
+            <li>Sesión de inmersión</li>
+            <li>Mapa de información publicable</li>
+            <li>Acuerdo de datos</li>
+          </ul>
         </li>
         <li class="card paso">
-          <h3>Semana 02</h3>
-          <p>Montamos el sistema, lo conectamos con la información del despacho y definimos contigo las reglas de escalado.</p>
+          <p class="card__meta">Semanas 2 y 3 · <span>Construcción</span></p>
+          <h3>Montaje y carga de vuestros expedientes</h3>
+          <p>Portal en vuestro dominio y agente conectado a WhatsApp Business.</p>
+          <ul class="tags">
+            <li>Portal a medida</li>
+            <li>WhatsApp Business</li>
+            <li>Validación previa</li>
+          </ul>
         </li>
         <li class="card paso">
-          <h3>Semana 03</h3>
-          <p>Validamos el funcionamiento con casos reales, formamos al equipo y lo dejamos operativo.</p>
+          <p class="card__meta">Semana 4 · <span>Puesta en marcha</span></p>
+          <h3>Apertura por tandas y formación</h3>
+          <p>Empezamos por un grupo, ajustamos con uso real y abrimos al resto.</p>
+          <ul class="tags">
+            <li>Apertura escalonada</li>
+            <li>Formación del equipo</li>
+            <li>Ajuste con uso real</li>
+          </ul>
         </li>
         <li class="card paso card--wide">
           <h3>A partir de ahí</h3>
           <p>Mantenimiento, soporte y ajustes sobre lo que vaya apareciendo con el uso real.</p>
         </li>
       </ol>
+
+      <p class="pasos__nota">El plazo cuenta desde que disponemos de accesos e información.</p>
     </div>
   </section>
 
@@ -626,18 +663,24 @@ a{color:inherit}
               <input id="cargo" name="cargo" type="text" autocomplete="organization-title" required>
             </div>
             <div class="field field--full">
-              <label for="caso">Tu caso</label>
+              <label for="caso">¿Qué parte de la atención a tus clientes te consume más tiempo?</label>
               <textarea id="caso" name="caso" rows="4" required></textarea>
             </div>
           </div>
 
+          <div class="hp" aria-hidden="true">
+            <label for="website">No rellenes este campo</label>
+            <input id="website" name="website" type="text" tabindex="-1" autocomplete="off">
+          </div>
+
           <label class="check" for="privacidad">
-            <input type="checkbox" id="privacidad" name="privacidad" required>
+            <input type="checkbox" id="privacidad" name="privacidad" aria-required="true">
             <span>He leído y acepto la <a href="#privacidad-legal">política de privacidad</a>.</span>
           </label>
 
           <div class="form__foot">
-            <button class="btn btn--wide" type="submit">Solicitar una demo</button>
+            <button class="btn btn--wide" type="submit" id="enviar">Solicitar una demo</button>
+            <p class="form__msg" id="aviso" role="alert" hidden></p>
           </div>
         </form>
 
@@ -730,16 +773,74 @@ document.getElementById('year').textContent = new Date().getFullYear();
   });
 })();
 
-/* Formulario sin backend */
-var form = document.getElementById('form');
-var done = document.getElementById('done');
-form.addEventListener('submit', function (e) {
-  e.preventDefault();
-  if (!form.reportValidity()) return;
-  form.hidden = true;
-  done.hidden = false;
-  done.focus();
-});
+/* Formulario: envío al webhook de n8n */
+(function () {
+  var WEBHOOK = 'https://jorgeiuristech.app.n8n.cloud/webhook/4a43d2cd-95c5-443d-ae9e-a55df3fbf0a4';
+
+  var form = document.getElementById('form');
+  var done = document.getElementById('done');
+  var boton = document.getElementById('enviar');
+  var aviso = document.getElementById('aviso');
+
+  function avisar(texto) {
+    aviso.textContent = texto;
+    aviso.hidden = false;
+  }
+
+  function limpiarAviso() {
+    aviso.textContent = '';
+    aviso.hidden = true;
+  }
+
+  function exito() {
+    form.reset();
+    form.hidden = true;
+    done.hidden = false;
+    done.focus();
+  }
+
+  function valor(id) {
+    return document.getElementById(id).value.trim();
+  }
+
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    limpiarAviso();
+
+    if (document.getElementById('website').value.trim() !== '') {
+      exito();
+      return;
+    }
+
+    if (!form.reportValidity()) return;
+
+    if (!document.getElementById('privacidad').checked) {
+      avisar('Para continuar, acepta la política de privacidad.');
+      return;
+    }
+
+    boton.disabled = true;
+
+    fetch(WEBHOOK, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        Nombre_Completo: valor('nombre'),
+        Email_Corporativo: valor('email'),
+        Telefono: valor('telefono'),
+        Nombre_Empresa: valor('despacho'),
+        Cargo: valor('cargo'),
+        Mensaje: valor('caso')
+      })
+    }).then(function (respuesta) {
+      if (!respuesta.ok) throw new Error('Respuesta ' + respuesta.status);
+      exito();
+    }).catch(function () {
+      boton.disabled = false;
+      avisar('No hemos podido enviar la solicitud. Inténtalo de nuevo o escríbenos por correo.');
+    });
+  });
+})();
 </script>
 </body>
 </html>
